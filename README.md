@@ -33,3 +33,21 @@ The package is distributed in a zip file from Github https://github.com/itsoulos
 6. Makefile: The input file to the make utility in order to build the tool. Usually, the user does not need to change this file.
 
 7. Makefile.inc: The file that contains some configuration parameters, such as the name of the C++ compiler etc. The user must edit and change this file before installation.
+
+# 3.Installation 
+
+The following steps are required in order to build the tool:
+
+1. Uncompress the tool as described in the previous section.
+
+2. cd GenClass 
+
+3. Edit the file Makefile.inc and change (if needed) the configuration parameters.
+
+4. Type make.
+
+The parameters in Makefile.inc are the following:
+
+1. CXX: It is the most important parameter. It specifies the name of the C++ compiler. In most systems running the GNU C++ compiler this parameter must be set to g++.
+
+2. ROOTDIR: Is the location of the GenClass directory. 
