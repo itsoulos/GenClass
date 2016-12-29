@@ -306,7 +306,7 @@ void	ClassProgram::getOutputs(vector<double> &real,vector<double> &est)
 	est.resize(testy.size());
 	for(int i=0;i<testy.size();i++)
 	{
-		real[i]=testy[i];
+		real[i]=findMapper(testy[i]);
 		est[i]=outy[i];
 	}
 }
