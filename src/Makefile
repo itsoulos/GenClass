@@ -9,6 +9,7 @@ all: genclass
 
 genclass: $(OBJS)
 	$(CXX) $(OBJS) $(LINK) -o genclass
+	mkdir -p ../bin
 	cp genclass ../bin
 
 %.o: %.cc
