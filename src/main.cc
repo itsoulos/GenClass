@@ -1,12 +1,14 @@
 # include <population.h>
 # include <get_options.h>
 # include <classprogram.h>
-# include <math.h>
+# include <cmath>
+#include <omp.h>
+
 
 int ok_to_print=0;
 int pattern_dimension;
 extern vector<double> lmargin,rmargin;
-ClassProgram *p;
+ClassProgram **p;
 Population *pop;
 vector<int> genome;
 string s;
@@ -16,9 +18,9 @@ void	printConfusionMatrix()
 	int i,j;
 	vector<double> T;
 	vector<double> O;
-	p->getOutputs(T,O);
+	p[omp_get_thread_num()]->getOutputs(T,O);
 	int N=T.size();
-	int nclass=p->getClass();
+	int nclass=p[omp_get_thread_num()]->getClass();
 	int **CM;
 	printf("** CONFUSION MATRIX ** Number of classes: %d\n",nclass);
 	CM=new int*[nclass];
@@ -44,8 +46,11 @@ void	initProgram(int argc,char **argv)
 {
 	parse_cmd_line(argc,argv);
 	srand(random_seed);
-	p=new ClassProgram(train_file);
-	pattern_dimension = p->getClass()-1;
+	p = new ClassProgram*[MAXTHREADS];
+	for(unsigned i = 0; i < MAXTHREADS;i++){
+		p[i]=new ClassProgram(train_file);
+	}
+	pattern_dimension = p[omp_get_thread_num()]->getClass()-1;
 	pop=new Population(pcount,length * pattern_dimension,p);
 	pop->setSelectionRate(srate);
 	pop->setMutationRate(mrate);
@@ -63,7 +68,7 @@ void	runGenetic()
 	{
 		pop->nextGeneration();
 		genome=pop->getBestGenome();
-		s=p->printF(genome);
+		s=p[omp_get_thread_num()]->printF(genome);
 		if(!strcmp(output_method,FULL_METHOD))
 			ok_to_print=1;
 		pop->evaluateBestFitness();
@@ -72,23 +77,23 @@ void	runGenetic()
 		if(fabs(bestf)<1e-7) break;
 		if(strcmp(output_method,CSV_METHOD)==0)
 		{
-			if(strlen(test_file)==0)	
+			if(strlen(test_file)==0)
 			printf("%5d,%10.4lg\n",
 				i,-pop->getBestFitness());
 			else
 			{
 				printf("%5d,%10.4lg,%10.4lg\n",
-					i,-pop->getBestFitness(),-p->getClassError(genome,test_file));
+					i,-pop->getBestFitness(),-p[omp_get_thread_num()]->getClassError(genome,test_file));
 			}
 		}
 		if(!strcmp(output_method,FULL_METHOD))
 		{
-			if(strlen(test_file)==0)	
+			if(strlen(test_file)==0)
 				printf("GENERATION=%5d FITNESS=%10.4lg%%\nPROGRAMS=\n%s",
 					i,-pop->getBestFitness(),s.c_str());
 			else
 				printf("GENERATION=%5d FITNESS=%10.4lg%% TEST_ERROR=%10.4lg%%\nPROGRAMS=\n%s",
-					i,-pop->getBestFitness(),-p->getClassError(genome,test_file),s.c_str());
+					i,-pop->getBestFitness(),-p[omp_get_thread_num()]->getClassError(genome,test_file),s.c_str());
 		}
 	}
 }
@@ -101,29 +106,29 @@ void	foldValidation()
 	vector<Data> trainx,testx;
 	vector<Data> totalx;
 	Data  totaly;
-	Data trainy,testy;	
+	Data trainy,testy;
 	vector<int> Index;
-	p->getTrainData(totalx,totaly);	
+	p[omp_get_thread_num()]->getTrainData(totalx,totaly);
 	Index.resize(totalx.size());
 	for(i=0;i<Index.size();i++) Index[i]=i;
 	for(i=0;i<Index.size();i++)
 	{
-		int randpos=abs(rand() % Index.size());
+		int randpos=rand() % Index.size();
 		int t=Index[i];
 		Index[i]=Index[randpos];
 		Index[randpos]=t;
-	}		
+	}
 	int testsize=Index.size() / foldcount;
 	int trainsize=Index.size() - testsize;
 	trainx.resize(trainsize);
 	trainy.resize(trainsize);
 	testx.resize(testsize);
-	testy.resize(testsize);	
+	testy.resize(testsize);
 	for(i=0;i<trainsize;i++) trainx[i].resize(totalx[0].size());
 	for(i=0;i<testsize;i++) testx[i].resize(totalx[0].size());
 	double avg_train_error=0.0;
 	double avg_test_error=0.0;
-	int nclass=p->getClass();
+	int nclass=p[omp_get_thread_num()]->getClass();
 	vector<double> T;
 	vector<double> O;
 	int **CM;
@@ -151,13 +156,13 @@ void	foldValidation()
 			trainy[icount]=totaly[j];
 			icount++;
 		}
-		p->setTrainData(trainx,trainy);
+		p[omp_get_thread_num()]->setTrainData(trainx,trainy);
 		runGenetic();
-		p->fitness(genome);
-		s=p->printF(genome);
+		p[omp_get_thread_num()]->fitness(genome);
+		s=p[omp_get_thread_num()]->printF(genome);
 		avg_train_error+=fabs(pop->getBestFitness());
-		avg_test_error+=fabs(p->getClassError(genome,testx,testy));
-		p->getOutputs(T,O);
+		avg_test_error+=fabs(p[omp_get_thread_num()]->getClassError(genome,testx,testy));
+		p[omp_get_thread_num()]->getOutputs(T,O);
 		for(j=0;j<T.size();j++) CM[(int)T[j]][(int)O[j]]+=1;
 		printf("EXPRESSION=\n%s",s.c_str());
 	}
@@ -180,23 +185,24 @@ void	foldValidation()
 void	runOneFold()
 {
 	runGenetic();
-	p->fitness(genome);
-	s=p->printF(genome);
+	p[omp_get_thread_num()]->fitness(genome);
+	s=p[omp_get_thread_num()]->printF(genome);
 	printf("FINAL OUTPUT\n");
 	printf("EXPRESSION=\n%s",s.c_str());
 	printf("TRAIN ERROR = %.2lf%%\n",fabs(pop->getBestFitness()));
 	if(strlen(test_file)!=0)
 	{
-		printf("CLASS ERROR = %.2lf%%\n",-p->getClassError(genome,test_file));
+		printf("CLASS ERROR = %.2lf%%\n",-p[omp_get_thread_num()]->getClassError(genome,test_file));
 		printConfusionMatrix();
 	}
+	p[omp_get_thread_num()]->printC(genome);
 }
 
 int main(int argc,char **argv)
 {
 	initProgram(argc,argv);
 	genome.resize(pattern_dimension * length);
-	if(foldcount) 
+	if(foldcount)
 		foldValidation();
 	else
 	{

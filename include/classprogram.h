@@ -2,6 +2,7 @@
 # include <program.h>
 # include <cprogram.h>
 # include <vector>
+# include <string>
 using namespace std;
 
 typedef vector<double> Data;
@@ -22,6 +23,8 @@ class ClassProgram	:public Program
 	public:
 		ClassProgram(char *filename);
 		string	printF(vector<int> &genome);
+		void printPython(vector<int> &genome, std::string outname = "classifier.py");
+		void printC(vector<int> &genome, std::string outname = "classifier.h");
 		int	findMapper(double x);
 		virtual double 	fitness(vector<int> &genome);
 		double	getClassError(vector<int> &genome,char *filename);
