@@ -1,14 +1,16 @@
-# include <population.h>	
+# include <population.h>
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
 # include <iostream>
+# include <omp.h>
 
-# define MAX_RULE	65536
+# define MAX_RULE	1024
+unsigned int seed = 666999666 ;  // random number seed
 
 /* Population constructor */
 /* Input: genome count , genome size, pointer to Program instance */
-Population::Population(int gcount,int gsize,Program *p)
+Population::Population(int gcount,int gsize,ClassProgram **p)
 {
 	elitism=1;
 	selection_rate = 0.1;
@@ -16,7 +18,9 @@ Population::Population(int gcount,int gsize,Program *p)
 	genome_count   = gcount;
 	genome_size    = gsize;
 	generation     = 0;
-	program        = p;
+	program = new Program*[MAXTHREADS];
+	for(unsigned i = 0; i < MAXTHREADS;i++)
+		program[i]        = p[i];
 
 	/* Create the population and based on genome count and size */
 	/* Initialize the genomes to random */
@@ -47,7 +51,7 @@ void	Population::reset()
 /* Return the fitness of a genome */
 double 	Population::fitness(vector<int> &g)
 {
-	return program->fitness(g);
+	return program[omp_get_thread_num()]->fitness(g);
 }
 
 /* The selection of the chromosomes according to the fitness value is performed */
@@ -64,7 +68,7 @@ void	Population::select()
 				dtemp=fitness_array[j];
 				fitness_array[j]=fitness_array[j+1];
 				fitness_array[j+1]=dtemp;
-				
+
 				memcpy(itemp,genome[j],genome_size*sizeof(int));
 				memcpy(genome[j],genome[j+1],genome_size*sizeof(int));
 				memcpy(genome[j+1],itemp,genome_size*sizeof(int));
@@ -79,7 +83,7 @@ int	Population::tournament()
     const int tournament_size =(genome_count<=100)?4:20;
     int    max_index=-1;
     int r;
-// Select the best parents of  the candidates 
+// Select the best parents of  the candidates
     for(int j=0;j<tournament_size;j++)
     {
 	r=rand() % (genome_count);
@@ -124,8 +128,8 @@ void	Population::crossover()
 		count_children+=2;
 		if(count_children>=nchildren) break;
 	}
-	
-	
+
+
 	for(int i=0;i<nchildren;i++)
 	{
 		memcpy(genome[genome_count-i-1],
@@ -157,13 +161,15 @@ void	Population::mutate()
 /* Evaluate the fitness for all chromosomes in the current population */
 void	Population::calcFitnessArray()
 {
-	vector<int> g;
-	g.resize(genome_size);
-
+	vector<int> g[MAXTHREADS];
+	for(unsigned i = 0; i < MAXTHREADS; i++)
+		g[i].resize(genome_size);
+		printf("%d\n",MAXTHREADS);
+#pragma omp parallel for num_threads(MAXTHREADS) schedule(dynamic)
 	for(int i=0;i<genome_count;i++)
 	{
-		for(int j=0;j<genome_size;j++) g[j]=genome[i][j];	
-		fitness_array[i]=fitness(g);
+		for(int j=0;j<genome_size;j++) g[omp_get_thread_num()][j]=genome[i][j];
+		fitness_array[i]=fitness(g[omp_get_thread_num()]);
 	}
 }
 
@@ -191,7 +197,14 @@ void	Population::nextGeneration()
 	if(generation)
 	mutate();
 	calcFitnessArray();
-	
+
+//*
+	  if(generation && generation%20==0)
+#pragma omp threadprivate(seed)
+#pragma omp parallel for num_threads(MAXTHREADS) schedule(dynamic)
+                for(int i=0;i<50;i++)
+                                localSearch(rand() % genome_count);
+//*/
 	select();
 	crossover();
 	++generation;
@@ -236,12 +249,51 @@ vector<int> Population::getBestGenome() const
 }
 
 /* Evaluate and return the best fitness for all chromosomes in the population */
-double	Population::evaluateBestFitness() 
+double	Population::evaluateBestFitness()
 {
 	vector<int> g;g.resize(genome_size);
-	for(int i=0;i<genome_size;i++) g[i]=genome[0][i];	
+	for(int i=0;i<genome_size;i++) g[i]=genome[0][i];
 	return fitness(g);
 }
+
+unsigned int randUint( void )
+{
+#pragma omp threadprivate(seed)
+	seed = seed * 1103515245 + 12345;
+return seed ;
+}
+
+void    Population::localSearch(int pos)
+{
+        vector<int> g;
+        g.resize(genome_size);
+        for(int i=0;i<genome_size;i++) g[i]=genome[pos][i];
+        for(int i=0;i<genome_size;i++)
+        {
+        //      double r=drand48();
+        //      if(r<mutation_rate)
+                {
+                        int ik=0;
+                        double f;
+                        do
+                        {
+                                //g[i]=rand() % MAX_RULE;
+								g[i]=randUint()% MAX_RULE;
+                                ik++;
+                                if(ik==10) break;
+                                f=fitness(g);
+                        }while(f<=fitness_array[pos]);
+                        if(ik!=10)
+                        {
+                                fitness_array[pos]=f;
+                                genome[pos][i]=g[i];
+                        }
+                        else g[i]=genome[pos][i];
+                }
+        }
+}
+
+
 
 /* Destructor */
 Population::~Population()

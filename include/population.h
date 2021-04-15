@@ -1,6 +1,9 @@
 # ifndef __POPULATION__H
 # include <program.h>
+#include <classprogram.h>
+# include <omp.h> 
 
+#define MAXTHREADS 32
 /* The Population class holds the current population. */
 /* The mutation, selection and crossover operators are defined here */
 class Population
@@ -15,7 +18,7 @@ class Population
 		int	genome_count;
 		int	genome_size;
 		int	generation;
-		Program	*program;
+		Program	**program;
 
 		double 	fitness(vector<int> &g);
 		void	select();
@@ -25,7 +28,7 @@ class Population
 		int	elitism;
 		int	tournament();
 	public:
-		Population(int gcount,int gsize,Program *p);
+		Population(int gcount,int gsize,ClassProgram **p);
 		void	setElitism(int s);
 		int	getGeneration() const;
 		int	getCount() const;
@@ -38,6 +41,7 @@ class Population
 		double	getBestFitness() const;
 		double	evaluateBestFitness();
 		vector<int> getBestGenome() const;
+		void    localSearch(int pos);
 		void	reset();
 		~Population();
 		

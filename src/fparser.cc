@@ -5,6 +5,7 @@
 #include "fparser.hh"
 #include "fpconfig.hh"
 #include "fptypes.hh"
+#include "omp.h"
 using namespace FUNCTIONPARSERTYPES;
 
 
@@ -15,7 +16,10 @@ using namespace FUNCTIONPARSERTYPES;
 
 using namespace std;
 
-int lastVariable;
+#pragma GCC optimize("unroll-loops","omit-frame-pointer","inline", "unsafe-math-optimizations")
+#pragma GCC option("arch=native","tune=native","no-zero-upper", "ffast-math")
+
+//int lastVariable;
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
 #endif
@@ -152,6 +156,7 @@ FunctionParser::Data::Data(const Data& cpy):
     if(StackSize) Stack = new double[StackSize];
 
     for(unsigned i=0; i<ByteCodeSize; ++i) ByteCode[i] = cpy.ByteCode[i];
+#pragma omp simd
     for(unsigned i=0; i<ImmedSize; ++i) Immed[i] = cpy.Immed[i];
 
     // No need to copy the stack contents because it's obsolete outside Eval()
@@ -368,7 +373,7 @@ FunctionParser::FindVariable(const char* F, const Data::VarMap_t& vars) const
         {
             string name(F, ind);
 		/**GIANNIS **/
-		if(name[0]=='x' && isdigit(name[1])) lastVariable = atoi(name.substr(1).c_str());
+		//if(name[0]=='x' && isdigit(name[1])) lastVariable = atoi(name.substr(1).c_str());
 		/**END OF GIANNIS **/
             return vars.find(name);
         }
@@ -493,7 +498,7 @@ int FunctionParser::CheckSyntax(const char* Function)
                 Ind += vIter->first.size();
             else
             {
-                // Check for constant
+                // Check for constantca
                 Data::ConstMap_t::const_iterator cIter =
                     FindConstant(&Function[Ind]);
                 if(cIter != Constants.end())
@@ -1011,7 +1016,7 @@ namespace
         return radians*(180.0/M_PI);
     }
 }
-
+//void cabs(& double* const stack, )
 double FunctionParser::Eval(const double* Vars)
 {
     const unsigned* const ByteCode = data->ByteCode;
@@ -1086,9 +1091,9 @@ double FunctionParser::Eval(const double* Vars)
               }
 #endif
 
-          case   cExp: 
+          case   cExp:
 			{
-				Stack[SP] = exp(Stack[SP]); break;	
+				Stack[SP] = exp(Stack[SP]); break;
 			}
           case cFloor: Stack[SP] = floor(Stack[SP]); break;
 
@@ -1105,7 +1110,7 @@ double FunctionParser::Eval(const double* Vars)
               }
 
           case   cInt: Stack[SP] = floor(Stack[SP]+.5); break;
-          case   cLog: 
+          case   cLog:
 			if(Stack[SP] <= 0) { evalErrorType=3; return 0; }
                        Stack[SP] = log(Stack[SP]); break;
           case cLog10: if(Stack[SP] <= 0) { evalErrorType=3; return 0; }

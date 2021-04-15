@@ -4,8 +4,8 @@
 ### LINK: Additional link directives
 ### INCL: Additional include directives
 CXX = g++
-LINK = 
+LINK =
 INCL =
-CFLAGS =
-ROOTDIR = /home/sheridan/GenClass/
+CFLAGS = -O4 -fopt-info -fopenmp  -fPIC  -Ofast -fopt-info-vec -ffast-math 
+ROOTDIR = /home/Desktop/TsoulosColab/GenClass/
 

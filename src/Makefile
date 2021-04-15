@@ -8,12 +8,12 @@ OBJS = population.o cprogram.o symbol.o rule.o program.o doublestack.o fparser.o
 all: genclass
 
 genclass: $(OBJS)
-	$(CXX) $(OBJS) $(LINK) -o genclass
+	$(CXX) $(OBJS) $(LINK) $(CFLAGS) -o genclass
 	mkdir -p ../bin
 	cp genclass ../bin
 
 %.o: %.cc
-	$(CXX) -c $< $(INC)  -o $@
+	$(CXX) -c $< $(INC) $(CFLAGS)  -o $@
 
 clean:
 	rm -f $(OBJS) *~ genclass

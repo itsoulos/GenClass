@@ -17,7 +17,7 @@
 #include <iostream>
 #endif
 
-extern int lastVariable;
+//extern int lastVariable;
 
 class FunctionParser
 {
@@ -151,7 +151,6 @@ private:
     int CompileAnd(const char*, int);
     int CompileOr(const char*, int);
     int CompileExpression(const char*, int, bool=false);
-
 
     void MakeTree(void*) const;
 };
