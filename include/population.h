@@ -3,7 +3,6 @@
 #include <classprogram.h>
 # include <omp.h> 
 
-#define MAXTHREADS 32
 /* The Population class holds the current population. */
 /* The mutation, selection and crossover operators are defined here */
 class Population

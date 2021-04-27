@@ -1,0 +1,2289 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+GenClass: A parallel tool for data classification based on Grammatical Evolution
+\end_layout
+
+\begin_layout Author
+Nikolaos Anastasopoulos
+\begin_inset Formula $^{(1)}$
+\end_inset
+
+, Ioannis G.
+ Tsoulos
+\begin_inset Formula $^{(2)}$
+\end_inset
+
+, Alexandros Tzallas
+\begin_inset Formula $^{(2)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+\begin_inset Formula $^{(1)}$
+\end_inset
+
+Department of Electrical and Computer Engineering, University of Patras,
+ Greece 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $^{(2)}$
+\end_inset
+
+Department of Informatics and Telecommunications, University of Ioannina,
+ 47100 Arta, Greece 
+\end_layout
+
+\begin_layout Abstract
+A genetic programming based method is introduced for data classification.
+ The fundamental element of the method is the well - known technique of
+ Grammatical Evolution.
+ The method constructs classification programs in a C – like programming
+ language in order to classify the input data, producing simple if – else
+ rules.
+ The paper introduces the method and the corresponding programming tool
+ as long as a series of experiments.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Keywords
+\series default
+: Genetic algorithm; Data classification; Grammatical evolution; Stochastic
+ methods
+\end_layout
+
+\begin_layout Section
+Introduction 
+\end_layout
+
+\begin_layout Standard
+Data classification finds many applications on a series of practical problems
+ from areas such as chemistry 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1,key-2,key-7"
+literal "true"
+
+\end_inset
+
+, biology 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-3,key-8"
+literal "true"
+
+\end_inset
+
+, economics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-4,key-9"
+literal "true"
+
+\end_inset
+
+, physics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-5,key-6"
+literal "true"
+
+\end_inset
+
+ etc.
+ During the past years many methods have been proposed to problems of this
+ category such as neural networks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-10"
+literal "true"
+
+\end_inset
+
+, radial basis functions networks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-11"
+literal "true"
+
+\end_inset
+
+, support vector machines 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-12"
+literal "true"
+
+\end_inset
+
+, etc.
+ The proposed method constructs classification programs in a human readable
+ format using the technique of Grammatical Evolution 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-13"
+literal "true"
+
+\end_inset
+
+.
+ Grammatical evolution is an evolutionary process that has been applied
+ with success in many areas such as music composition 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-14"
+literal "true"
+
+\end_inset
+
+, economics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-15"
+literal "true"
+
+\end_inset
+
+, symbolic regression 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-17"
+literal "true"
+
+\end_inset
+
+, robot control 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-18"
+literal "true"
+
+\end_inset
+
+ and caching algorithms 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-19"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The rest of this article is organized as follows: in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Method-description"
+
+\end_inset
+
+ the basic steps of the method are outlined as well as the installation
+ steps for the relevant software.
+ In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Experimental-results"
+
+\end_inset
+
+ a series of experiments on some well - known classification datasets are
+ demonstrated.
+ In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conclusions"
+
+\end_inset
+
+ conclusions and guidelines for further expansion of the software are presented.
+ 
+\end_layout
+
+\begin_layout Section
+Method description 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Method-description"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The proposed algorithm 
+\end_layout
+
+\begin_layout Standard
+The procedure of Grammatical Evolution has two major requirements: 
+\end_layout
+
+\begin_layout Itemize
+The context free grammar (CFG) of the target language ( expressed in BNF
+ format ).
+\end_layout
+
+\begin_layout Itemize
+The associated fitness function.
+ 
+\end_layout
+
+\begin_layout Standard
+The CFG grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined as 
+\begin_inset Formula $G=\left(N,T,S,P\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $N$
+\end_inset
+
+ is a set of non terminal symbols, 
+\begin_inset Formula $T$
+\end_inset
+
+ is a finite set of terminal symbols with the constraint 
+\begin_inset Formula $N\cap T=\emptyset$
+\end_inset
+
+.
+ The terminal symbol 
+\begin_inset Formula $S$
+\end_inset
+
+ is named start symbol of the grammar and 
+\begin_inset Formula $P$
+\end_inset
+
+ is a finite set of production rules in the form 
+\begin_inset Formula $A\rightarrow a$
+\end_inset
+
+ or 
+\begin_inset Formula $A\rightarrow aB,\ A,B\in N,\ a\in T$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Grammatical evolution is a genetic programming procedure, but the chromosomes
+ are not expressed in the usual for of parse trees but as vectors of integers.
+ Each element of the vector stands for a production rule from the given
+ BNF grammar.
+ The procedure initiates from the start symbol of the grammar and iteratively
+ produces the program string, by replacing non terminal symbols with the
+ right hand of the selected production rule.
+ The selection is performed in two steps: 
+\end_layout
+
+\begin_layout Itemize
+The next element from the vector is taken (denoted as V).
+ 
+\end_layout
+
+\begin_layout Itemize
+The production rule is selected using the scheme Rule = V mod R, where R
+ is the number of production rules for the current non – terminal symbol.
+ 
+\end_layout
+
+\begin_layout Standard
+The selection is executed iteratively until either a valid expression is
+ produced or the end of chromosome is reached.
+ For the second case the chromosome is considered as invalid and a large
+ value assigned to the corresponding fitness.
+\end_layout
+
+\begin_layout Standard
+The main steps of the algorithm are: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Initialization
+\series default
+ step.
+ 
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Read the train data 
+\end_layout
+
+\begin_layout Enumerate
+Set 
+\begin_inset Formula $N_{G}$
+\end_inset
+
+ as the maximum number of generations
+\end_layout
+
+\begin_layout Enumerate
+Set 
+\begin_inset Formula $N_{C}$
+\end_inset
+
+ as the number of chromosomes in the population.
+\end_layout
+
+\begin_layout Enumerate
+Set 
+\begin_inset Formula $P_{S}$
+\end_inset
+
+ as the selection rate.
+\end_layout
+
+\begin_layout Enumerate
+Set 
+\begin_inset Formula $P_{M}$
+\end_inset
+
+ as the mutation rate.
+\end_layout
+
+\begin_layout Enumerate
+Initialize the chromosomes of the population.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Genetic
+\series default
+ step
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+For
+\series default
+ 
+\begin_inset Formula $i=1,\ldots,N_{g}$
+\end_inset
+
+ 
+\series bold
+do
+\series default
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Create for every chromosome in the population a classification program using
+ the previous procedure of grammatical evolution.
+\end_layout
+
+\begin_layout Enumerate
+Calculate the fitness for every chromosome of the population
+\end_layout
+
+\begin_layout Enumerate
+Execute the genetic operators of selection and mutation
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+EndFor
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Evaluation
+\series default
+ step
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Create a classification program for the best chromosome in the population.
+\end_layout
+
+\begin_layout Enumerate
+Apply the previous program to test set and report the induced error.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Distribution 
+\end_layout
+
+\begin_layout Standard
+The package is distributed in a tar.gz file named 
+\family typewriter
+GenClass.tar.gz
+\family default
+ and under UNIX systems the user must issue the following commands to extract
+ the associated files:
+\end_layout
+
+\begin_layout Enumerate
+gunzip 
+\family typewriter
+GenClass.tar.gz
+\end_layout
+
+\begin_layout Enumerate
+tar xfv 
+\family typewriter
+GenClass.tar
+\end_layout
+
+\begin_layout Standard
+These steps create a directory named 
+\family typewriter
+GenClass
+\family default
+ with the following contents:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+bin
+\series default
+: A directory which is initially empty.
+ After compilation of the package, it will contain the executable
+\series bold
+ genclass 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+doc
+\series default
+: This directory contains the documentation of the package (this file) in
+ different formats: A \SpecialChar LyX
+ file, A \SpecialChar LaTeX
+ file and a PostScript file.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+examples
+\series default
+: A directory that contains some test functions.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+include
+\series default
+: A directory which contains the header files for all the classes of the
+ package.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+src
+\series default
+: A directory containing the source files of the package.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Makefile
+\series default
+: The input file to the 
+\family typewriter
+make
+\family default
+ utility in order to build the tool.
+ Usually, the user does not need to change this file.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Makefile.inc
+\series default
+: The file that contains some configuration parameters, such as the name
+ of the C++ compiler etc.
+ The user must edit and change this file before installation.
+\end_layout
+
+\begin_layout Subsection
+Installation 
+\end_layout
+
+\begin_layout Standard
+The following steps are required in order to build the tool:
+\end_layout
+
+\begin_layout Enumerate
+Uncompress the tool as described in the previous section.
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+cd GenClass 
+\end_layout
+
+\begin_layout Enumerate
+Edit the file 
+\family typewriter
+Makefile.inc
+\family default
+ and change (if needed) the configuration parameters.
+\end_layout
+
+\begin_layout Enumerate
+Type 
+\family typewriter
+make
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+The parameters in 
+\family typewriter
+Makefile.inc
+\family default
+ are the following:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+CXX
+\series default
+: It is the most important parameter.
+ It specifies the name of the C++ compiler.
+ In most systems running the GNU C++ compiler this parameter must be set
+ to g++.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+ROOTDIR
+\series default
+: Is the location of the GenClass directory.
+ 
+\end_layout
+
+\begin_layout Subsection
+The executable genclass
+\end_layout
+
+\begin_layout Standard
+The outcome of the compilation is the executable 
+\family typewriter
+genclass
+\family default
+ under the directory 
+\family typewriter
+bin
+\family default
+.
+ The executable has the following command line parameters:
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+-h
+\family default
+:The program prints a help screen and afterwards the program terminates.
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+-c
+\family default
+ 
+\family typewriter
+\series bold
+count
+\family default
+\series default
+: The integer parameter 
+\family typewriter
+\series bold
+count
+\family default
+\series default
+ determines the number of chromosomes for the genetic population.
+ The default value for this parameter is 500.
+\end_layout
+
+\begin_layout Enumerate
+-g 
+\series bold
+gens
+\series default
+: The integer parameter 
+\series bold
+gens
+\series default
+ determines the maximum number of generations allowed for the genetic algorithm.
+ The default value is 200.
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+-s
+\family default
+ 
+\family typewriter
+\series bold
+srate
+\family default
+\series default
+: The double parameter 
+\family typewriter
+\series bold
+srate
+\family default
+\series default
+ specifies the selection rate used in the genetic algorithm.
+ The default value for this parameter is 0.10 (10%).
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+-m
+\family default
+ 
+\family typewriter
+\series bold
+mrate
+\family default
+\series default
+: The double parameter 
+\family typewriter
+\series bold
+mrate
+\family default
+\series default
+ specifies the mutation rate used in the genetic algorithm.
+ The default value for this parameter is 0.05 (5%).
+\end_layout
+
+\begin_layout Enumerate
+-l 
+\series bold
+size
+\series default
+: The integer parameter 
+\series bold
+size
+\series default
+ determines the size of every chromosome in the genetic population.
+ The default value for this parameter is 100.
+\end_layout
+
+\begin_layout Enumerate
+-p 
+\series bold
+train_file
+\series default
+: The string parameter 
+\series bold
+train_file 
+\series default
+specifies the file containing the points that will be used as train data
+ for the algorithm.
+ The file should conform to the format outlined in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Data-format."
+
+\end_inset
+
+.
+ The integer value D determines the dimensionality of the problem and the
+ value M determines the number of points in the file.
+ Every subsequent line contains a pattern and the final column is the real
+ output (category) for this pattern.
+\end_layout
+
+\begin_layout Enumerate
+-t 
+\series bold
+test_file
+\series default
+: The string parameter 
+\series bold
+test_file 
+\series default
+specifies the file containing the test data for the particular problem.
+ The file should be in the same format as the 
+\series bold
+train_file
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+-o 
+\series bold
+method
+\series default
+: The string parameter method specifies the output method for the executable.
+ The available options are
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+simple.
+ The program prints output only on termination.
+ 
+\end_layout
+
+\begin_layout Enumerate
+csv.
+ The program prints in csv (comma separated value) format information in
+ every generation.
+ In every generation the program prints: number of generations, train error
+ and test error.
+ This is the default value for the string parameter 
+\series bold
+method
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+full.
+ The program prints in every generation detailed information about the optimizat
+ion procedure as well as classification error for every distinct class of
+ the problem.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\family typewriter
+-r
+\family default
+ 
+\family typewriter
+\series bold
+seed
+\family default
+\series default
+: The integer parameter 
+\family typewriter
+\series bold
+seed
+\family default
+\series default
+ specifies the seed for the random number generator.
+ It can assume any integer value.
+\end_layout
+
+\begin_layout Section
+Experimental results 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Experimental-results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+A typical example 
+\end_layout
+
+\begin_layout Standard
+Consider the Ionosphere dataset available from the Machine Learning Repository
+ in the following URL: http://www.ics.uci.edu/~mlearn/MLRepository.html.
+ The ionosphere dataset contains data from the Johns Hopkins Ionosphere
+ database.
+ The two-class dataset contains 351 examples of 34 features each.
+ The datasets has been divided into two files, 
+\family typewriter
+ionosphere.train
+\family default
+ and 
+\family typewriter
+ionosphere.test
+\family default
+ under directory 
+\family typewriter
+examples
+\family default
+.
+ A typical run for the 
+\family typewriter
+GenClass
+\family default
+ will be
+\end_layout
+
+\begin_layout LyX-Code
+../bin/genclass -p ionosphere.train -t ionosphere.test -g 10 -o csv
+\end_layout
+
+\begin_layout Standard
+The output of this command is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Typical-output-of"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Experiments
+\end_layout
+
+\begin_layout Standard
+In order to measure the efficiency of the proposed method a series of experiment
+s were conducted on some common classification problems found in two major
+ dataset databases:
+\end_layout
+
+\begin_layout Enumerate
+Uci dataset repository, 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://archive.ics.uci.edu/ml/index.php
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Keel repository, 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://sci2s.ugr.es/keel/datasets.php
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Keel"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+All the experiments were conducted 30 times using different seed for the
+ random generator each time and averages were taken.
+ In all experiments we have used the parameters shown in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Parameters-for-the"
+
+\end_inset
+
+.
+ The following datasets were used 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Wine
+\series default
+ dataset.
+ The wine recognition dataset contains data from wine chemical analysis.
+ It contains 178 examples of 13 features each that are classified into three
+ classes.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Glass
+\series default
+ dataset.
+ The dataset contains glass component analysis for glass pieces that belong
+ to 6 classes.
+ The dataset contains 214 examples with 10 attributes each.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Tae
+\series default
+ dataset.
+ The data consist of evaluations of teaching performance over three regular
+ semesters and two summer semesters of 151 teaching assistant (TA) assignments
+ at the Statistics Department of the University of Wisconsin-Madison.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Spiral
+\series default
+ dataset.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Pima
+\series default
+ dataset.
+ The Pima Indians Diabetes dataset contains 768 examples of 8 attributes
+ each that are classified into two categories: healthy and diabetic.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Ionosphere
+\series default
+ dataset.
+ The ionosphere dataset (ION in the following tables) contains data from
+ the Johns Hopkins Ionosphere database.
+ The two-class dataset contains 351 examples of 34 features each.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Appendictis
+\series default
+ dataset, proposed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "appendicitis"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Australian
+\series default
+ dataset, the dataset concerns credit card applications.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Hayes roth
+\series default
+ dataset.
+ This dataset
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hayesroth"
+literal "false"
+
+\end_inset
+
+ contains 
+\series bold
+5
+\series default
+ numeric-valued attributes and 132 patterns.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Alcohol
+\series default
+ dataset, a dataset about Alcohol consumption 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Alcohol"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Dermatology dataset.
+\end_layout
+
+\begin_layout Enumerate
+Balance dataset.
+\end_layout
+
+\begin_layout Enumerate
+Regions2 dataset.
+\end_layout
+
+\begin_layout Enumerate
+Parkinsons dataset.
+\end_layout
+
+\begin_layout Enumerate
+Wdbc dataset.
+\end_layout
+
+\begin_layout Enumerate
+Pofailures dataset.
+\end_layout
+
+\begin_layout Enumerate
+Bands dataset.
+\end_layout
+
+\begin_layout Enumerate
+Heart dataset.
+\end_layout
+
+\begin_layout Enumerate
+Ecoli dataset.
+\end_layout
+
+\begin_layout Enumerate
+Spambase dataset.
+\end_layout
+
+\begin_layout Enumerate
+Haberman dataset.
+\end_layout
+
+\begin_layout Enumerate
+HouseVotes dataset.
+\end_layout
+
+\begin_layout Enumerate
+Shuttle dataset.
+\end_layout
+
+\begin_layout Enumerate
+Lymography dataset.
+\end_layout
+
+\begin_layout Enumerate
+Mammographic dataset.
+\end_layout
+
+\begin_layout Enumerate
+OptDigits dataset.
+\end_layout
+
+\begin_layout Enumerate
+Page Blocks dataset.
+\end_layout
+
+\begin_layout Enumerate
+Penbased dataset.
+\end_layout
+
+\begin_layout Enumerate
+Ring dataset.
+\end_layout
+
+\begin_layout Enumerate
+Saheart dataset.
+\end_layout
+
+\begin_layout Enumerate
+Segment dataset.
+\end_layout
+
+\begin_layout Enumerate
+Sonar dataset.
+\end_layout
+
+\begin_layout Enumerate
+Texture dataset.
+\end_layout
+
+\begin_layout Enumerate
+Thyroid dataset.
+\end_layout
+
+\begin_layout Enumerate
+TwoNorm dataset.
+\end_layout
+
+\begin_layout Enumerate
+Vowel dataset.
+\end_layout
+
+\begin_layout Enumerate
+Zoo dataset.
+\end_layout
+
+\begin_layout Enumerate
+Eeg dataset.
+ As an real word example, consider an EEG dataset described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-20"
+literal "true"
+
+\end_inset
+
+ is used here.
+ The dataset consists of five sets (denoted as Z, O, N, F and S) each containing
+ 100 single-channel EEG segments each having 23.6 sec duration.
+ Sets Z and O have been taken from surface EEG recordings of five healthy
+ volunteers with eye open and closed, respectively.
+ Signals in two sets have been measured in seizure-free intervals from five
+ patients in the epileptogenic zone (F) and from the hippocampal formation
+ of the opposite hemisphere of the brain (N).
+ Set S contains seizure activity, selected from all recording sites exhibiting
+ ictal activity.
+ Sets Z and O have been recorded extracranially, whereas sets N, F and S
+ have been recorded intracranially.
+\end_layout
+
+\begin_layout Standard
+The results from the experiments are displayed in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Experimental-results"
+
+\end_inset
+
+.
+ The column 200 Generations denotes the results for 
+\begin_inset Formula $N_{G}=200$
+\end_inset
+
+ and the column 500 Generations denotes the results for 
+\begin_inset Formula $N_{G}=500$
+\end_inset
+
+.
+ The numbers in cells denote test error.
+\end_layout
+
+\begin_layout Section
+Conclusions 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusions"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A software which implements a method for data classifications was introduced.
+ The method is based on grammatical evolution and the software is designed
+ to be portable.
+ The software is entirely written in ANSI C++ and there is not any specific
+ software requirement.
+ Future versions of the software will include 
+\end_layout
+
+\begin_layout Itemize
+Input from various formats.
+\end_layout
+
+\begin_layout Itemize
+Usage of improvement stopping rules for the genetic algorithm.
+\end_layout
+
+\begin_layout Itemize
+Additional output formats.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+literal "true"
+
+\end_inset
+
+C.
+ Güler, G.
+ D.
+ Thyne, J.
+ E.
+ McCray, K.A.
+ Turner, Evaluation of graphical and multivariate statistical methods for
+ classification of water chemistry data, Hydrogeology Journal 
+\series bold
+10
+\series default
+, pp.
+ 455-474, 2002
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-2"
+literal "true"
+
+\end_inset
+
+E.
+ Byvatov ,U.
+ Fechner ,J.
+ Sadowski , G.
+ Schneider, Comparison of Support Vector Machine and Artificial Neural Network
+ Systems for Drug/Nondrug Classification, J.
+ Chem.
+ Inf.
+ Comput.
+ Sci.
+ 
+\series bold
+43
+\series default
+, pp 1882–1889, 2003.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-7"
+literal "true"
+
+\end_inset
+
+Kunwar P.
+ Singh, Ankita Basant, Amrita Malik, Gunja Jain, Artificial neural network
+ modeling of the river water quality—A case study, Ecological Modelling
+ 
+\series bold
+220
+\series default
+, pp.
+ 888-895, 2009.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-3"
+literal "true"
+
+\end_inset
+
+I.
+ Guyon, J.
+ Weston, S.
+ Barnhill, V.
+ Vapnik, Gene Selection for Cancer Classification using Support Vector Machines,
+ Machine Learning 
+\series bold
+46
+\series default
+, pp.
+ 389-422, 2002.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-8"
+literal "true"
+
+\end_inset
+
+R.
+ Marabini, J.M.
+ Carazo, Pattern recognition and classification of images of biological
+ macromolecules using artificial neural networks, Biophysical Journal 
+\series bold
+66
+\series default
+, pp.
+ 1804-1814, 1994.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-4"
+literal "true"
+
+\end_inset
+
+I.
+ Kaastra, M.
+ Boyd, Designing a neural network for forecasting financial and economic
+ time series, Neurocomputing 
+\series bold
+10
+\series default
+, pp.
+ 215-236, 1996.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-9"
+literal "true"
+
+\end_inset
+
+Moshe Leshno, Yishay Spector, Neural network prediction analysis: The bankruptcy
+ case, Neurocomputing 
+\series bold
+10
+\series default
+, pp.
+ 125-147, 1996.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-5"
+literal "true"
+
+\end_inset
+
+S.
+ R.
+ Folkes,O.
+ Lahav, S.
+ J.
+ Maddox, An artificial neural network approach to the classification of
+ galaxy spectra, Montly Notices of the Royal Astronomical Society 283, pp
+ 651-665, 1996.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-6"
+literal "true"
+
+\end_inset
+
+C.Z.
+ Cai, W.L.
+ Wang, Y.Z.
+ Chen, Support vector machine classification of physical and biological
+ datasets, Int.
+ J.
+ Mod.
+ Phys.
+ C 14, pp.
+ 575, 2003
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-10"
+literal "true"
+
+\end_inset
+
+K.
+ Hornik, Multilayer feedforward networks are universal approximators, Neural
+ Networks 2, pp.
+ 359-366, 1989
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-11"
+literal "true"
+
+\end_inset
+
+M.D.
+ Buhmann, Radial basis functions, Cambridge monographs on Applied and Computatio
+nal Mathemetics, 2003.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-12"
+literal "true"
+
+\end_inset
+
+I.
+ Steinwart, A.
+ Christmann, Support Vector Machines, Information Science and Statistics,
+ Springer, 2008.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-13"
+literal "true"
+
+\end_inset
+
+M.
+ O’Neill, C.
+ Ryan, Grammatical evolution, IEEE Trans.
+ Evol.
+ Comput.
+ 5 (2001) 349–358.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-14"
+literal "true"
+
+\end_inset
+
+Alfonso Ortega, Rafael Sánchez, Manuel Alfonseca Moreno, Automatic composition
+ of music by means of grammatical evolution, APL '02 Proceedings of the
+ 2002 conference on APL: array processing languages: lore, problems, and
+ applications Pages 148 - 155.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-15"
+literal "true"
+
+\end_inset
+
+Michael O’Neill, Anthony Brabazon, Conor Ryan, J.
+ J.
+ Collins, Evolving Market Index Trading Rules Using Grammatical Evolution,
+ Applications of Evolutionary Computing Volume 2037 of the series Lecture
+ Notes in Computer Science pp 343-352.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-17"
+literal "true"
+
+\end_inset
+
+M.
+ O’Neill, C.
+ Ryan, Grammatical Evolution: Evolutionary Automatic Programming in a Arbitary
+ Language, Genetic Programming, vol.
+ 4, Kluwer Academic Publishers, Dordrecht, 2003
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-18"
+literal "true"
+
+\end_inset
+
+J.J.
+ Collins, C.
+ Ryan, in: Proceedings of AROB 2000, Fifth International Symposium on Artificial
+ Life and Robotics, 2000.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Keel"
+literal "false"
+
+\end_inset
+
+J.
+ Alcalá-Fdez, A.
+ Fernandez, J.
+ Luengo, J.
+ Derrac, S.
+ García, L.
+ Sánchez, F.
+ Herrera.
+ KEEL Data-Mining Software Tool: Data Set Repository, Integration of Algorithms
+ and Experimental Analysis Framework.
+ Journal of Multiple-Valued Logic and Soft Computing 17, pp.
+ 255-287, 2011.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "appendicitis"
+literal "false"
+
+\end_inset
+
+Weiss, Sholom M.
+ and Kulikowski, Casimir A., Computer Systems That Learn: Classification
+ and Prediction Methods from Statistics, Neural Nets, Machine Learning,
+ and Expert Systems, Morgan Kaufmann Publishers Inc, 1991.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "hayesroth"
+literal "false"
+
+\end_inset
+
+B.
+ Hayes-Roth, B., F.
+ Hayes-Roth.
+ Concept learning and the recognition and classification of exemplars.
+ Journal of Verbal Learning and Verbal Behavior 
+\series bold
+16
+\series default
+, pp.
+ 321-338, 1977.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Alcohol"
+literal "false"
+
+\end_inset
+
+Tzimourta, Katerina D.
+ and Tsoulos, Ioannis and Bilero, Thanasis and Tzallas, Alexandros T.
+ and Tsipouras, Markos G.
+ and Giannakeas, Nikolaos, Direct Assessment of Alcohol Consumption in Mental
+ State Using Brain Computer Interfaces and Grammatical Evolution, Inventions
+ 
+\series bold
+3
+\series default
+, pp.
+ 1-12, 2018.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-19"
+literal "true"
+
+\end_inset
+
+M.
+ O’Neill, C.
+ Ryan, in: K.
+ Miettinen, M.M.
+ Mkel, P.
+ Neittaanmki, J.
+ Periaux (Eds.), Evolutionary Algorithms in Engineering and Computer Science,
+ Jyvskyl, Finland, 1999, pp.
+ 127–134.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-20"
+literal "true"
+
+\end_inset
+
+R.G.
+ Andrzejak, K.
+ Lehnertz, F.
+ Mormann, C.
+ Rieke, P.
+ David, and C.
+ E.
+ Elger, Indications of nonlinear deterministic and finite-dimensional structures
+ in time series of brain electrical activity: Dependence on recording region
+ and brain state, Phys.
+ Rev.
+ E 
+\series bold
+64
+\series default
+, pp.
+ 1-8, 2001.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data format.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Data-format."
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+D
+\end_layout
+
+\begin_layout Plain Layout
+M
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{array}{ccccc}
+x_{11} & x_{12} & \ldots & x_{1D} & y_{1}\\
+x_{21} & x_{22} & \ldots & x_{2D} & y_{2}\\
+\vdots & \vdots & \vdots & \vdots & \vdots\\
+x_{M1} & x_{M2} & \ldots & x_{MD} & y_{M}
+\end{array}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Typical output of the GenClass command
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Typical-output-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  1,     15.43,     19.32     
+\end_layout
+
+\begin_layout LyX-Code
+  2,     15.43,     19.32     
+\end_layout
+
+\begin_layout LyX-Code
+  3,     15.43,     19.32     
+\end_layout
+
+\begin_layout LyX-Code
+  4,     13.71,     17.05     
+\end_layout
+
+\begin_layout LyX-Code
+  5,     12.57,     15.34     
+\end_layout
+
+\begin_layout LyX-Code
+  6,     12.57,     15.34     
+\end_layout
+
+\begin_layout LyX-Code
+  7,     12.57,     15.34     
+\end_layout
+
+\begin_layout LyX-Code
+  8,        12,     13.64     
+\end_layout
+
+\begin_layout LyX-Code
+  9,        12,     13.64 
+\end_layout
+
+\begin_layout LyX-Code
+  FINAL OUTPUT 
+\end_layout
+
+\begin_layout LyX-Code
+  EXPRESSION= 
+\end_layout
+
+\begin_layout LyX-Code
+  if(!(x7<log(cos(cos(((-788.787)+((sin(x28)/sin(cos(((-7.17)/x34))))
+\end_layout
+
+\begin_layout LyX-Code
+      +(-83.6))))))|x6>x13&x7<log(x5))) 
+\end_layout
+
+\begin_layout LyX-Code
+     CLASS=0.00 
+\end_layout
+
+\begin_layout LyX-Code
+else  CLASS=1.00 
+\end_layout
+
+\begin_layout LyX-Code
+ TRAIN ERROR = 12.00% 
+\end_layout
+
+\begin_layout LyX-Code
+ CLASS ERROR = 13.64% 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Parameters for the experiments.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Parameters-for-the"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PARAMETER
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+VALUE
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $N_{C}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $N_{G}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $P_{S}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $90\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $P_{M}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experimental results
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Experimental-results"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DATASET
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200 Generations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500 Generations
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wine
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.41%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.33%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Glass
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+39.41%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+38.10%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pima
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.84%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.49%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ionosphere
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.45%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.14%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EEG
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.76%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.07%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

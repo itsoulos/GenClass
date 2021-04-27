@@ -5,6 +5,7 @@
 #include <omp.h>
 
 
+extern int maxthreads;
 int ok_to_print=0;
 int pattern_dimension;
 extern vector<double> lmargin,rmargin;
@@ -46,8 +47,8 @@ void	initProgram(int argc,char **argv)
 {
 	parse_cmd_line(argc,argv);
 	srand(random_seed);
-	p = new ClassProgram*[MAXTHREADS];
-	for(unsigned i = 0; i < MAXTHREADS;i++){
+	p = new ClassProgram*[maxthreads];
+	for(unsigned i = 0; i < maxthreads;i++){
 		p[i]=new ClassProgram(train_file);
 	}
 	pattern_dimension = p[omp_get_thread_num()]->getClass()-1;
@@ -196,6 +197,7 @@ void	runOneFold()
 		printConfusionMatrix();
 	}
 	p[omp_get_thread_num()]->printC(genome);
+	p[omp_get_thread_num()]->printPython(genome);
 }
 
 int main(int argc,char **argv)

@@ -118,14 +118,43 @@ string	ClassProgram::printF(vector<int> &genome)
 }
 
 void ClassProgram::printPython(vector<int> &genome, std::string outname){
-	;
+	std::regex e("\.py$");
+	std::string s = outname;
+	s = std::regex_replace(s,e,"\.c");
+	this->printC(genome,s);
+	std::string strprogram(
+		"import ctypes\n"
+		"import numpy as np\n"
+		"from typing import List\n\n"
+
+		"def classifier(input: List):\n"
+		"\tfun = ctypes.CDLL(\"./classifier.so\")\n"
+		"\tfun.classifier.argtypes = [ctypes.POINTER(ctypes.c_double)]\n"
+		"\tfun.classifier.restype = ctypes.c_int\n"
+		"\ta = np.array(input)\n"
+		"\tinput_ptr = a.ctypes.data_as(ctypes.POINTER(ctypes.c_double))\n"
+		"\treturn fun.classifier(input_ptr)\n\n\n"
+	);
+	ofstream outprogram;
+	outprogram.open(outname); // opens the file
+	if( !outprogram ) { // file couldn't be opened
+		 cerr << "Error: file could not be opened" << endl;
+		 exit(1);
+	}
+
+	std::cout << "Python Program:\n" << strprogram << std::endl;
+
+	outprogram << strprogram;
+
+
+	outprogram.close();
 }
 
 void ClassProgram::printC(vector<int> &genome, std::string outname){
 	ofstream outprogram;
 	std::string strprogram(
 		"#include <math.h>\n\n"
-		"int classifier(double *input){\n\n"
+		"int classifier(double *x){\n\n"
 		"\tint CLASS = 0;\n\n"
 		);
 
@@ -172,7 +201,7 @@ void ClassProgram::printC(vector<int> &genome, std::string outname){
 
 		strprogram = strprogram + s + "\n\treturn CLASS;\n}\n";
 
-	outprogram.open("classifier.h"); // opens the file
+	outprogram.open(outname); // opens the file
 	if( !outprogram ) { // file couldn't be opened
 		 cerr << "Error: file could not be opened" << endl;
 		 exit(1);

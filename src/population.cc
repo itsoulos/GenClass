@@ -7,6 +7,7 @@
 
 # define MAX_RULE	1024
 unsigned int seed = 666999666 ;  // random number seed
+extern int maxthreads;
 
 /* Population constructor */
 /* Input: genome count , genome size, pointer to Program instance */
@@ -18,8 +19,8 @@ Population::Population(int gcount,int gsize,ClassProgram **p)
 	genome_count   = gcount;
 	genome_size    = gsize;
 	generation     = 0;
-	program = new Program*[MAXTHREADS];
-	for(unsigned i = 0; i < MAXTHREADS;i++)
+	program = new Program*[maxthreads];
+	for(unsigned i = 0; i < maxthreads;i++)
 		program[i]        = p[i];
 
 	/* Create the population and based on genome count and size */
@@ -161,11 +162,11 @@ void	Population::mutate()
 /* Evaluate the fitness for all chromosomes in the current population */
 void	Population::calcFitnessArray()
 {
-	vector<int> g[MAXTHREADS];
-	for(unsigned i = 0; i < MAXTHREADS; i++)
+	vector<int> g[maxthreads];
+	for(unsigned i = 0; i < maxthreads; i++)
 		g[i].resize(genome_size);
-		printf("%d\n",MAXTHREADS);
-#pragma omp parallel for num_threads(MAXTHREADS) schedule(dynamic)
+		printf("%d\n",maxthreads);
+#pragma omp parallel for num_threads(maxthreads) schedule(dynamic)
 	for(int i=0;i<genome_count;i++)
 	{
 		for(int j=0;j<genome_size;j++) g[omp_get_thread_num()][j]=genome[i][j];
@@ -201,7 +202,7 @@ void	Population::nextGeneration()
 //*
 	  if(generation && generation%20==0)
 #pragma omp threadprivate(seed)
-#pragma omp parallel for num_threads(MAXTHREADS) schedule(dynamic)
+#pragma omp parallel for num_threads(maxthreads) schedule(dynamic)
                 for(int i=0;i<50;i++)
                                 localSearch(rand() % genome_count);
 //*/

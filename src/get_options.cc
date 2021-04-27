@@ -6,6 +6,7 @@
 
 int	pcount;
 int	length;
+int 	maxthreads=16;
 double	srate;
 double	mrate;
 char	train_file[1024];
@@ -17,7 +18,7 @@ int	wrapping;
 int	foldcount;
 void	parse_cmd_line(int argc,char **argv);
 
-const char *short_options="c:l:s:m:p:t:g:w:r:f:o:";
+const char *short_options="c:l:s:m:p:t:g:w:r:f:o:d:";
 
 void	print_usage()
 {
@@ -26,6 +27,7 @@ void	print_usage()
 			"\t-f	Specify fold count for fold validation. Default value 0 (no folding).\n"
 			"\t-g	Specify number of generations.\n"
 			"\t-l	Specify	population length.\n"
+			"\t-d	Specify maximum number of threads.\n"
 			"\t-m	Specify mutation rate.\n"
 			"\t-o	Specify output method.\n"
 			"\t-p	Specify train file.\n"
@@ -61,6 +63,9 @@ void	parse_cmd_line(int argc,char **argv)
 		{
 			case 'c':
 				pcount=atoi(optarg);
+				break;
+			case 'd':
+				maxthreads=atoi(optarg);
 				break;
 			case 'l':
 				length=atoi(optarg);
