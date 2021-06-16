@@ -142,7 +142,7 @@ void ClassProgram::printPython(vector<int> &genome, std::string outname){
 		 exit(1);
 	}
 
-	std::cout << "Python Program:\n" << strprogram << std::endl;
+//	std::cout << "Python Program:\n" << strprogram << std::endl;
 
 	outprogram << strprogram;
 
@@ -207,7 +207,7 @@ void ClassProgram::printC(vector<int> &genome, std::string outname){
 		 exit(1);
 	}
 
-	std::cout << "C++ Program:\n" << strprogram << std::endl;
+//	std::cout << "C++ Program:\n" << strprogram << std::endl;
 
 	outprogram << strprogram;
 

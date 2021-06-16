@@ -5,7 +5,7 @@
 # include <iostream>
 # include <omp.h>
 
-# define MAX_RULE	1024
+# define MAX_RULE	10240
 unsigned int seed = 666999666 ;  // random number seed
 extern int maxthreads;
 
@@ -165,7 +165,6 @@ void	Population::calcFitnessArray()
 	vector<int> g[maxthreads];
 	for(unsigned i = 0; i < maxthreads; i++)
 		g[i].resize(genome_size);
-		printf("%d\n",maxthreads);
 #pragma omp parallel for num_threads(maxthreads) schedule(dynamic)
 	for(int i=0;i<genome_count;i++)
 	{
@@ -199,13 +198,13 @@ void	Population::nextGeneration()
 	mutate();
 	calcFitnessArray();
 
-//*
+
 	  if(generation && generation%20==0)
 #pragma omp threadprivate(seed)
 #pragma omp parallel for num_threads(maxthreads) schedule(dynamic)
                 for(int i=0;i<50;i++)
                                 localSearch(rand() % genome_count);
-//*/
+
 	select();
 	crossover();
 	++generation;

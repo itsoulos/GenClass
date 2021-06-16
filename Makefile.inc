@@ -7,5 +7,4 @@ CXX = g++
 LINK =
 INCL =
 CFLAGS = -O4 -fopt-info -fopenmp  -fPIC  -Ofast -fopt-info-vec -ffast-math 
-ROOTDIR = /home/Desktop/TsoulosColab/GenClass/
-
+ROOTDIR = /home/sheridan/Desktop/ERGASIES/GenClass/

@@ -5,6 +5,12 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{amssymb}
+\usepackage{lineno}
+\usepackage{url}
+\journal{Softwarex}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -29,6 +35,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -76,6 +83,22 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frontmatter}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
 \begin_layout Title
 GenClass: A parallel tool for data classification based on Grammatical Evolution
 \end_layout
@@ -98,6 +121,13 @@ Nikolaos Anastasopoulos
 \end_layout
 
 \begin_layout Date
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Address
 \begin_inset Formula $^{(1)}$
 \end_inset
 
@@ -115,14 +145,16 @@ Department of Informatics and Telecommunications, University of Ioannina,
 \end_layout
 
 \begin_layout Abstract
-A genetic programming based method is introduced for data classification.
- The fundamental element of the method is the well - known technique of
- Grammatical Evolution.
- The method constructs classification programs in a C – like programming
- language in order to classify the input data, producing simple if – else
- rules.
- The paper introduces the method and the corresponding programming tool
- as long as a series of experiments.
+A genetic programming tool is proposed here for data classification.
+ The tool is based on Grammatical Evolution technique and its designed to
+ exploit multicore computing systems using the OpenMp library.
+ The tool constructs classification programs in a C – like programming language
+ in order to classify the input data, producing simple if – else rules and
+ upon termination the tool produces the classification rules in C and Python
+ files.
+ The tool is tested on a wide range of classification problems and the produced
+ results are compared against traditional techniques for data classification,
+ yelding very promising results.
 \end_layout
 
 \begin_layout Standard
@@ -132,6 +164,38 @@ Keywords
 \series default
 : Genetic algorithm; Data classification; Grammatical evolution; Stochastic
  methods
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{frontmatter}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+linenumbers
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -730,6 +794,17 @@ count
 \end_layout
 
 \begin_layout Enumerate
+-f 
+\series bold
+count
+\series default
+.
+ Specify fold count for fold validation.
+ Default value 0 (no folding).
+ 
+\end_layout
+
+\begin_layout Enumerate
 -g 
 \series bold
 gens
@@ -740,6 +815,17 @@ gens
 \series default
  determines the maximum number of generations allowed for the genetic algorithm.
  The default value is 200.
+\end_layout
+
+\begin_layout Enumerate
+-d 
+\series bold
+count
+\series default
+.
+ The integer parameter d determines the maximum number of threads used by
+ the OpenMp library.
+ The default value is 16.
 \end_layout
 
 \begin_layout Enumerate
@@ -901,6 +987,14 @@ seed
  It can assume any integer value.
 \end_layout
 
+\begin_layout Subsection
+The output files 
+\end_layout
+
+\begin_layout Standard
+Na grapsoume edo oti paragei conv matrix, arxeio se c++ kai arxeio se python.
+\end_layout
+
 \begin_layout Section
 Experimental results 
 \begin_inset CommandInset label
@@ -968,7 +1062,7 @@ s were conducted on some common classification problems found in two major
 \end_layout
 
 \begin_layout Enumerate
-Uci dataset repository, 
+UCI dataset repository, 
 \begin_inset Flex URL
 status open
 
@@ -1058,7 +1152,20 @@ Tae
 \series bold
 Spiral
 \series default
- dataset.
+ dataset: The spiral artificial dataset contains 1000 two-dimensional examples
+ that belong to two classes (500 examples each).
+ The number of the features is 2.
+ The data in the first class are created using the following formula: 
+\begin_inset Formula $x_{1}=0.5t\cos\left(0.08t\right),\ x_{2}=0.5t\cos\left(0.08t+\frac{\pi}{2}\right)$
+\end_inset
+
+ and the second class data using
+\series bold
+: 
+\begin_inset Formula $x_{1}=0.5t\cos\left(0.08t+\pi\right),\ x_{2}=0.5t\cos\left(0.08t+\frac{3\pi}{2}\right)$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -1146,111 +1253,218 @@ literal "false"
 \end_layout
 
 \begin_layout Enumerate
-Dermatology dataset.
+
+\series bold
+Dermatology
+\series default
+ dataset.
+ Dataset used for differential diagnosis of erythemato-squamous diseases.
+ The dataset has 366 instances of 34 features each.
+ 
 \end_layout
 
 \begin_layout Enumerate
-Balance dataset.
+
+\series bold
+Balance
+\series default
+ dataset.
+ This data set was generated to model psychological experimental results.
+ It contains 625 patterns of 4 features each.
 \end_layout
 
 \begin_layout Enumerate
-Regions2 dataset.
+
+\series bold
+Regions2
+\series default
+ dataset.
+ It is created from liver biopsy images of patients with hepatitis C 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "regions"
+literal "true"
+
+\end_inset
+
+.
+ From each region in the acquired images, 18 shape-based and color-based
+ features were extracted, while it was also annotated form medical experts.
+ The resulting dataset includes 600 samples belonging into 6 classes.
 \end_layout
 
 \begin_layout Enumerate
-Parkinsons dataset.
+
+\series bold
+Parkinsons
+\series default
+ dataset.
+ This dataset is composed of a range of biomedical voice measurements from
+ 31 people, 23 with Parkinson's disease (PD)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "parkinsons"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
-Wdbc dataset.
+
+\series bold
+Wdbc
+\series default
+ dataset.
+ The Wisconsin diagnostic breast cancer dataset (WDBC) contains data for
+ breast tumors.
+ It contains 569 patterns of 30 features each.
 \end_layout
 
 \begin_layout Enumerate
-Pofailures dataset.
+
+\series bold
+Popfailures
+\series default
+ dataset.
+ This dataset contains records of simulation crashes encountered during
+ climate model uncertainty quantification (UQ) ensembles.
+ It contains 540 patterns of 18 features each.
 \end_layout
 
 \begin_layout Enumerate
-Bands dataset.
+
+\series bold
+Heart
+\series default
+ dataset.
+ The task is to detect the absence or presence of heart disease.
+ It contains 270 patterns of 13 features each.
 \end_layout
 
 \begin_layout Enumerate
-Heart dataset.
+
+\series bold
+Ecoli
+\series default
+ dataset.
+ The goal here is to predict the localization site of proteins.
+ It contains 336 patterns of 7 features each.
 \end_layout
 
 \begin_layout Enumerate
-Ecoli dataset.
+
+\series bold
+Haberman
+\series default
+ dataset.
+ A dataset about breast cancer from a study at the University of Chicago's
+ Billings Hospital.
+ It contains 306 patterns of 3 features each.
 \end_layout
 
 \begin_layout Enumerate
-Spambase dataset.
+
+\series bold
+HouseVotes
+\series default
+ dataset.
+ This data set includes votes for each of the U.S.
+ House of Representatives Congressmen on the 16 key votes.
+ 
 \end_layout
 
 \begin_layout Enumerate
-Haberman dataset.
+
+\series bold
+Shuttle
+\series default
+ dataset.
+ The task is to decide what type of control of a spacecraft should be employed.
+ It contains 58000 patterns of 9 features each.
 \end_layout
 
 \begin_layout Enumerate
-HouseVotes dataset.
+
+\series bold
+Lymography
+\series default
+ dataset.
+ The aim here is to detect the presence of a lymphoma in patients.
+ It contains 148 patterns of 18 features each.
 \end_layout
 
 \begin_layout Enumerate
-Shuttle dataset.
+
+\series bold
+Mammographic
+\series default
+ dataset.
+ This dataset be used to identify the severity (benign or malignant) of
+ a mammographic mass lesion from BI-RADS attributes and the patient's age.
+ It contains 830 patterns of 5 features each.
 \end_layout
 
 \begin_layout Enumerate
-Lymography dataset.
+
+\series bold
+OptDigits
+\series default
+ dataset.
+ Optical Recognition of Handwritten Digits data set.
+ It contains 5620 patterns of 64 features each.
 \end_layout
 
 \begin_layout Enumerate
-Mammographic dataset.
+
+\series bold
+Page Blocks
+\series default
+ dataset.
+ The dataset contains blocks of the page layout of a document that has been
+ detected by a segmentation process.
+ It has 5473 patterns with 10 features each.
 \end_layout
 
 \begin_layout Enumerate
-OptDigits dataset.
+
+\series bold
+Penbased
+\series default
+ dataset.
+ This is a Pen-Based Recognition of Handwritten Digits data set with 10992
+ patterns of 16 features.
 \end_layout
 
 \begin_layout Enumerate
-Page Blocks dataset.
+
+\series bold
+Saheart
+\series default
+ dataset.
+ The dataset is about to categorize persons if have a coronary heart disease.
+ The dataset contains 462 patterns with 9 features each.
 \end_layout
 
 \begin_layout Enumerate
-Penbased dataset.
+
+\series bold
+Segment
+\series default
+ dataset.
+ This database contains patterns from a database of 7 outdoor images (classes).
+ The dataset contains 2310 patterns with 19 features each.
 \end_layout
 
 \begin_layout Enumerate
-Ring dataset.
-\end_layout
 
-\begin_layout Enumerate
-Saheart dataset.
-\end_layout
-
-\begin_layout Enumerate
-Segment dataset.
-\end_layout
-
-\begin_layout Enumerate
-Sonar dataset.
-\end_layout
-
-\begin_layout Enumerate
-Texture dataset.
-\end_layout
-
-\begin_layout Enumerate
-Thyroid dataset.
-\end_layout
-
-\begin_layout Enumerate
-TwoNorm dataset.
-\end_layout
-
-\begin_layout Enumerate
-Vowel dataset.
-\end_layout
-
-\begin_layout Enumerate
-Zoo dataset.
+\series bold
+Thyroid
+\series default
+ dataset.
+ The goal in this dataset is to detect if a patient is normal or suffers
+ from hyperthyroidism or hypothyroidism.
 \end_layout
 
 \begin_layout Enumerate
@@ -1729,6 +1943,42 @@ M.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
+key "parkinsons"
+literal "false"
+
+\end_inset
+
+Little MA, McSharry PE, Hunter EJ, Spielman J, Ramig LO.
+ Suitability of dysphonia measurements for telemonitoring of Parkinson's
+ disease.
+ IEEE Trans Biomed Eng.
+ 2009;56(4):1015.
+ doi:10.1109/TBME.2008.2005954
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "regions"
+literal "false"
+
+\end_inset
+
+Giannakeas, N., Tsipouras, M.G., Tzallas, A.T., Kyriakidi, K., Tsianou, Z.E., Manousou,
+ P., Hall, A., Karvounis, E.C., Tsianos, V., Tsianos, E.
+ A clustering based method for collagen proportional area extraction in
+ liver biopsy images (2015) Proceedings of the Annual International Conference
+ of the IEEE Engineering in Medicine and Biology Society, EMBS, 2015-November,
+ art.
+ no.
+ 7319047, pp.
+ 3097-3100.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
 key "key-20"
 literal "true"
 
@@ -1801,6 +2051,150 @@ x_{M1} & x_{M2} & \ldots & x_{MD} & y_{M}
 \end_inset
 
  
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A typical produced C file of the tool.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:coutput"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+#include <math.h>
+\end_layout
+
+\begin_layout LyX-Code
+int classifier(double *x)
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+        int CLASS = 0;
+\end_layout
+
+\begin_layout LyX-Code
+        if(!(x[6]<x[25]||x[4]<(((x[5]-((-5.79)/x[0]))/(((-503.562)/x[22])/
+\end_layout
+
+\begin_layout LyX-Code
+              (x[20]/x[24])))/(x[0]+(x[23]/x[4])))
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+||!(x[23]<=x[2]))) CLASS=0;         
+\end_layout
+
+\begin_layout LyX-Code
+else CLASS=1;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+        return CLASS; 
+\end_layout
+
+\begin_layout LyX-Code
+} 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A typical output file in Python language.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:pythonoutput"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+import ctypes 
+\end_layout
+
+\begin_layout LyX-Code
+import numpy as np from typing 
+\end_layout
+
+\begin_layout LyX-Code
+import List
+\end_layout
+
+\begin_layout LyX-Code
+def classifier(input: List):         
+\end_layout
+
+\begin_layout LyX-Code
+    fun = ctypes.CDLL("./classifier.so")         
+\end_layout
+
+\begin_layout LyX-Code
+    fun.classifier.argtypes = [ctypes.POINTER(ctypes.c_double)]         
+\end_layout
+
+\begin_layout LyX-Code
+    fun.classifier.restype = ctypes.c_int         
+\end_layout
+
+\begin_layout LyX-Code
+    a = np.array(input)         
+\end_layout
+
+\begin_layout LyX-Code
+    input_ptr = a.ctypes.data_as(ctypes.POINTER(ctypes.c_double))         
+\end_layout
+
+\begin_layout LyX-Code
+    return fun.classifier(input_ptr) 
+\end_layout
+
+\end_inset
+
+
 \begin_inset Float figure
 wide false
 sideways false
@@ -1903,7 +2297,7 @@ else  CLASS=1.00
 \begin_inset Float table
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2066,13 +2460,13 @@ VALUE
 \begin_inset Float table
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Experimental results
+Results.
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Experimental-results"
@@ -2090,8 +2484,9 @@ name "tab:Experimental-results"
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="3">
+<lyxtabular version="3" rows="35" columns="4">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -2109,7 +2504,16 @@ DATASET
 \begin_inset Text
 
 \begin_layout Plain Layout
-200 Generations
+NEURAL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RBF
 \end_layout
 
 \end_inset
@@ -2118,7 +2522,7 @@ DATASET
 \begin_inset Text
 
 \begin_layout Plain Layout
-500 Generations
+GENCLASS
 \end_layout
 
 \end_inset
@@ -2129,7 +2533,7 @@ DATASET
 \begin_inset Text
 
 \begin_layout Plain Layout
-Wine
+Alcohol
 \end_layout
 
 \end_inset
@@ -2138,7 +2542,16 @@ Wine
 \begin_inset Text
 
 \begin_layout Plain Layout
-10.41%
+26.85%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46.63%
 \end_layout
 
 \end_inset
@@ -2147,7 +2560,197 @@ Wine
 \begin_inset Text
 
 \begin_layout Plain Layout
-9.33%
+14.68%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Appendicitis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+22.50%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.23%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.00%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Australian
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30.48%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+34.89%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.57%%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Balance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.19%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.42%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dermatology
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.33%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+62.34%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.72%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ecoli
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53.60%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59.59%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.54%
 \end_layout
 
 \end_inset
@@ -2167,7 +2770,16 @@ Glass
 \begin_inset Text
 
 \begin_layout Plain Layout
-39.41%
+54.24%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50.16%
 \end_layout
 
 \end_inset
@@ -2176,7 +2788,7 @@ Glass
 \begin_inset Text
 
 \begin_layout Plain Layout
-38.10%
+33.81%
 \end_layout
 
 \end_inset
@@ -2187,7 +2799,7 @@ Glass
 \begin_inset Text
 
 \begin_layout Plain Layout
-Pima
+Haberman
 \end_layout
 
 \end_inset
@@ -2196,7 +2808,16 @@ Pima
 \begin_inset Text
 
 \begin_layout Plain Layout
-27.84%
+29.94%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.10%
 \end_layout
 
 \end_inset
@@ -2205,7 +2826,121 @@ Pima
 \begin_inset Text
 
 \begin_layout Plain Layout
-28.49%
+27.33%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hayes Roth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35.16%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64.36%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.39%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Heart
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.95%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31.20%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.55%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HouseVotes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.54%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.13%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.72%
 \end_layout
 
 \end_inset
@@ -2225,7 +2960,16 @@ Ionosphere
 \begin_inset Text
 
 \begin_layout Plain Layout
-9.45%
+15.83%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.22%
 \end_layout
 
 \end_inset
@@ -2234,7 +2978,805 @@ Ionosphere
 \begin_inset Text
 
 \begin_layout Plain Layout
-9.14%
+8.29%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Liverdisorder
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.82%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30.84%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32.06%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lymography
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.57%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.31%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.29%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mammographic
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.08%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.38%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.35%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+OptDigits
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50.37%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+81.22%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.33%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Page Blocks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.09%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.82%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parkinsons
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.44%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.42%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.47%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Penbased
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+42.91%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+82.47%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.32%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pima
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29.07%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.78%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.59%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Popfailures
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.57%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.04%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.04%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Regions2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.32%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+38.29%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.52%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Saheart
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.22%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32.19%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31.30%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Segment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.54%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59.68%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.52%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shuttle
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32.97%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.15%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Spiral
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+42.60%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44.87%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36.90%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tae
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+47.53%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60.07%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+37.33%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Thyroid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.28%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.52%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.89%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wdbc
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.55%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.27%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.11%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wine
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46.63%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31.41%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.71%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Z_F_S
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.17%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.16%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.00%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Z_O_N_F_S
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+78.73%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48.71%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32.20%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ZO_NF_S
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.97%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.02%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.60%
 \end_layout
 
 \end_inset
@@ -2245,7 +3787,7 @@ Ionosphere
 \begin_inset Text
 
 \begin_layout Plain Layout
-EEG
+ZONF_S
 \end_layout
 
 \end_inset
@@ -2254,7 +3796,16 @@ EEG
 \begin_inset Text
 
 \begin_layout Plain Layout
-28.76%
+3.48%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.03%
 \end_layout
 
 \end_inset
@@ -2263,7 +3814,7 @@ EEG
 \begin_inset Text
 
 \begin_layout Plain Layout
-28.07%
+1.60%
 \end_layout
 
 \end_inset
@@ -2273,10 +3824,6 @@ EEG
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
