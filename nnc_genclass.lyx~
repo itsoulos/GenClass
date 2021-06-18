@@ -363,7 +363,7 @@ literal "true"
 
 \begin_layout Standard
 This article introduces a software tool (named GenClass) coded in ANSI C++,
- for data classification using classification rules in human readable form.
+ for data classification using classification rules in human readble form.
  The rules are created with the Grammatical evolution method and can be
  applied in any classification problem, without a priory knowledge of the
  dataset.
@@ -1357,11 +1357,11 @@ name "sec:Impact"
 \begin_layout Standard
 This software tool produces human readable classification rules in ANSI
  C++ as well as in Python format.
- This rules used to classify any classification problem without a priory
- knowledge about the nature of the problem.
+ This rules used to classify any classification problem without a priori
+ knoweledge about the nature of the problem.
  The implemented software utilizes the Grammatical Evolution technique to
  produce the classification rules based on simple BNF grammar.
- The software is guided by a series of command line options that control
+ The software is guded by a series of command line options that control
  many critical options of the underlying method such as the number of chromosome
 s, the mutation rate etc.
  Also, the software is designed to be use in multi core computational environmen
