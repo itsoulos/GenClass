@@ -53,5 +53,40 @@ x21 x22 ... x2D y2
 
 xM1 xM2 ... xMD yM
 
-The integer value D determines the dimensionality of the problem and the value M determines the number of points in the file. Every subsequent line contains a pattern and the final column is the real output (category) for this pattern. The number of the classes is induced from the file. The software scans the file and identifies the number of problem’s classes. The classes should be integer numbers with number 0 assigned to the first class.
+The integer value D determines the dimensionality of the problem and the value M determines the number of points in the file. Every subsequent line contains a pattern and the final column is the real output (category) for this pattern. The number of the classes is induced from the file. The software scans the file and identifies the number of problem’s classes. The classes should be integer numbers with number 0 assigned to the first class. As an example, consider the ionosphere.train file under examples subdirectory of the distribution.
+
+
+## The executable genclass ## 
+The outcome of the software compilation and installation is the executable genclass under the directory bin. The executable has the following command line parameters:
+
+1. -h:The program prints a help screen.
+
+2. -c count: The parameter count determines the number of chromosomes with default value 500.
+
+3. -f count. Specify fold count for fold validation. Default value 0 (no folding). 
+
+4. -g gens: The parameter gens determines the maximum number of generations with default value is 200.
+
+5. -d count. The parameter d determines the maximum number of threads used by the OpenMp library. The default value is 16.
+
+6. -s srate: The parameter srate specifies the selection rate with default value 0.10 (10%).
+
+7. -m mrate: The parameter mrate specifies the mutation rate with default value 0.05 (5%).
+
+8. -l size: The parameter size determines the size of every chromosome with default value 100.
+
+9. -p train_file: The string parameter train_file specifies the file containing the points that will be used as train data for the algorithm. The file should conform to the format outlined in figure [fig:Data-format.]. 
+
+10. -t test_file: The string parameter test_file specifies the file containing the test data for the particular problem. The file should be in the same format as the train_file.
+
+11. -o method: The string parameter method specifies the output method for the executable. The available options are
+
+(a) simple. The program prints output only on termination. 
+
+(b) csv. In every generation the program prints: number of generations, train error and test error. 
+
+(c) full. The program prints in every generation detailed information about the optimization procedure.
+
+12. -r seed: The integer parameter seed specifies the seed for the random number generator. It can assume any integer value.
+## A typical run ##
 
