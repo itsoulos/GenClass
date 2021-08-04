@@ -89,4 +89,45 @@ The executable has the following command line parameters:
 
 12. -r seed: The integer parameter seed specifies the seed for the random number generator. It can assume any integer value.
 ## A typical run ##
+Consider the Ionosphere dataset available from the Machine Learning Repository in the following URL: http://www.ics.uci.edu/~mlearn/MLRepository.html. The ionosphere dataset contains data from the Johns Hopkins Ionosphere database. The two-class dataset contains 351 examples of 34 features each. The datasets has been divided into two files, ionosphere.train and ionosphere.test under directory examples. A typical run for the GenClass will be
+
+~~~~~~~~
+../bin/genclass -p ionosphere.train -t ionosphere.test -g 10 -o csv
+~~~~~~~~
+
+The output of this command is:
+
+1, 15.43, 19.32
+
+2, 15.43, 19.32
+
+3, 15.43, 19.32
+
+4, 13.71, 17.05
+
+5, 12.57, 15.34
+
+6, 12.57, 15.34
+
+7, 12.57, 15.34
+
+8, 12, 13.64
+
+9, 12, 13.64
+
+FINAL OUTPUT EXPRESSION= if(!(x7<log(cos(cos(((-788.787)+
+
+((sin(x28)/sin(cos(((-7.17)/x34))))+(-83.6))))))|x6>x13&x7<log(x5))) CLASS=0.00
+
+else CLASS=1.00
+
+TRAIN ERROR = 12.00%
+
+CLASS ERROR = 13.64%
+
+** CONFUSION MATRIX ** Number of classes: 2
+
+102 3
+
+21 50
 
