@@ -57,7 +57,7 @@ The integer value D determines the dimensionality of the problem and the value M
 
 
 ## The executable genclass ## 
-The outcome of the software compilation and installation is the executable genclass under the directory bin. The executable has the following command line parameters:
+The executable has the following command line parameters:
 
 1. -h:The program prints a help screen.
 
@@ -75,17 +75,17 @@ The outcome of the software compilation and installation is the executable gencl
 
 8. -l size: The parameter size determines the size of every chromosome with default value 100.
 
-9. -p train_file: The string parameter train_file specifies the file containing the points that will be used as train data for the algorithm. The file should conform to the format outlined in figure [fig:Data-format.]. 
+9. -p train_file: The string parameter train_file specifies the file containing the points that will be used as train data for the algorithm.  
 
-10. -t test_file: The string parameter test_file specifies the file containing the test data for the particular problem. The file should be in the same format as the train_file.
+10. -t test_file: The string parameter test_file specifies the file containing the test data for the particular problem. 
 
 11. -o method: The string parameter method specifies the output method for the executable. The available options are
 
-(a) simple. The program prints output only on termination. 
+	(a) simple. The program prints output only on termination. 
 
-(b) csv. In every generation the program prints: number of generations, train error and test error. 
+	(b) csv. In every generation the program prints: number of generations, train error and test error. 
 
-(c) full. The program prints in every generation detailed information about the optimization procedure.
+	(c) full. The program prints in every generation detailed information about the optimization procedure.
 
 12. -r seed: The integer parameter seed specifies the seed for the random number generator. It can assume any integer value.
 ## A typical run ##
