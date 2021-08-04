@@ -18,11 +18,13 @@ The following steps are required in order to build the tool:
 
 The parameters in Makefile.inc are the following:
 
-    - CXX: It is the most important parameter. It specifies the name of the C++ compiler. In most systems running the GNU C++ compiler this parameter must be set to g++.
+    - CXX: It is the most important parameter. It specifies the name of the C++ compiler. 
+           In most systems running the GNU C++ compiler this parameter must be set to g++.
 
     - CFLAGS: Optimization parameters for the c++ compiler.
     - ROOTDIR: Is the location of the GenClass directory. 
 
+After the compilation the executable genclass will be placed under bin subdirectory.
 ## Contents ##
 The software has the following subdirectories
 
@@ -31,5 +33,7 @@ The software has the following subdirectories
     - examples: A directory that contains some test functions.
     - include: A directory which contains the header files for all the classes of the package.
     - src: A directory containing the source files of the package.
-    - Makefile: The input file to the make utility in order to build the tool. Usually, the user does not need to change this file.
-    - Makefile.inc: The file that contains some configuration parameters, such as the name of the C++ compiler etc. The user must edit and change this file before installation.
+    - Makefile: The input file to the make utility in order to build the tool. 
+                Usually, the user does not need to change this file.
+    - Makefile.inc: The file that contains some configuration parameters, such as the name of the C++ compiler etc. 
+            The user must edit and change this file before installation.
