@@ -2481,7 +2481,7 @@ MLP-GEN
 \begin_inset Text
 
 \begin_layout Plain Layout
-RBF-GEN
+RBF
 \end_layout
 
 \end_inset
@@ -2490,7 +2490,7 @@ RBF-GEN
 \begin_inset Text
 
 \begin_layout Plain Layout
-RBF
+RBF GEN
 \end_layout
 
 \end_inset
@@ -2537,7 +2537,7 @@ Alcohol
 \begin_inset Text
 
 \begin_layout Plain Layout
-20.29%
+46.63%
 \end_layout
 
 \end_inset
@@ -2546,7 +2546,7 @@ Alcohol
 \begin_inset Text
 
 \begin_layout Plain Layout
-46.63%
+20.29%
 \end_layout
 
 \end_inset
@@ -2593,7 +2593,7 @@ Appendicitis
 \begin_inset Text
 
 \begin_layout Plain Layout
-11.50%
+12.23%
 \end_layout
 
 \end_inset
@@ -2602,7 +2602,7 @@ Appendicitis
 \begin_inset Text
 
 \begin_layout Plain Layout
-12.23%
+11.50%
 \end_layout
 
 \end_inset
@@ -2649,7 +2649,7 @@ Australian
 \begin_inset Text
 
 \begin_layout Plain Layout
-33.11%
+34.89%
 \end_layout
 
 \end_inset
@@ -2658,7 +2658,7 @@ Australian
 \begin_inset Text
 
 \begin_layout Plain Layout
-34.89%
+33.30%
 \end_layout
 
 \end_inset
@@ -2705,7 +2705,7 @@ Balance
 \begin_inset Text
 
 \begin_layout Plain Layout
-15.30%
+33.42%
 \end_layout
 
 \end_inset
@@ -2714,7 +2714,7 @@ Balance
 \begin_inset Text
 
 \begin_layout Plain Layout
-33.42%
+12.96%
 \end_layout
 
 \end_inset
@@ -2761,7 +2761,7 @@ Dermatology
 \begin_inset Text
 
 \begin_layout Plain Layout
-34.94%
+62.34%
 \end_layout
 
 \end_inset
@@ -2770,7 +2770,7 @@ Dermatology
 \begin_inset Text
 
 \begin_layout Plain Layout
-62.34%
+34.94%
 \end_layout
 
 \end_inset
@@ -2817,7 +2817,7 @@ Ecoli
 \begin_inset Text
 
 \begin_layout Plain Layout
-56.64%
+59.59%
 \end_layout
 
 \end_inset
@@ -2826,7 +2826,7 @@ Ecoli
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.59%
+56.64%
 \end_layout
 
 \end_inset
@@ -2864,16 +2864,7 @@ Glass
 \begin_inset Text
 
 \begin_layout Plain Layout
-51.68%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-48.65%
+49.30%
 \end_layout
 
 \end_inset
@@ -2883,6 +2874,15 @@ Glass
 
 \begin_layout Plain Layout
 50.16%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45.54%
 \end_layout
 
 \end_inset
@@ -2920,16 +2920,7 @@ Haberman
 \begin_inset Text
 
 \begin_layout Plain Layout
-27.53%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-24.06%
+26.98%
 \end_layout
 
 \end_inset
@@ -2939,6 +2930,15 @@ Haberman
 
 \begin_layout Plain Layout
 25.10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.06%
 \end_layout
 
 \end_inset
@@ -2985,7 +2985,7 @@ Hayes Roth
 \begin_inset Text
 
 \begin_layout Plain Layout
-34.77%
+64.36%
 \end_layout
 
 \end_inset
@@ -2994,7 +2994,7 @@ Hayes Roth
 \begin_inset Text
 
 \begin_layout Plain Layout
-64.36%
+33.54%
 \end_layout
 
 \end_inset
@@ -3032,16 +3032,7 @@ Heart
 \begin_inset Text
 
 \begin_layout Plain Layout
-18.07%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-21.17%
+24.20%
 \end_layout
 
 \end_inset
@@ -3051,6 +3042,15 @@ Heart
 
 \begin_layout Plain Layout
 31.20%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.00%
 \end_layout
 
 \end_inset
@@ -3088,16 +3088,7 @@ HouseVotes
 \begin_inset Text
 
 \begin_layout Plain Layout
-7.46%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.29%
+7.28%
 \end_layout
 
 \end_inset
@@ -3107,6 +3098,15 @@ HouseVotes
 
 \begin_layout Plain Layout
 6.13%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.29%
 \end_layout
 
 \end_inset
@@ -3144,16 +3144,7 @@ Ionosphere
 \begin_inset Text
 
 \begin_layout Plain Layout
-15.70%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8.63%
+11.30%
 \end_layout
 
 \end_inset
@@ -3163,6 +3154,15 @@ Ionosphere
 
 \begin_layout Plain Layout
 16.22%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.63%
 \end_layout
 
 \end_inset
@@ -3200,16 +3200,7 @@ Liverdisorder
 \begin_inset Text
 
 \begin_layout Plain Layout
-32.38%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-27.76%
+31.37%
 \end_layout
 
 \end_inset
@@ -3219,6 +3210,15 @@ Liverdisorder
 
 \begin_layout Plain Layout
 30.84%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.33%
 \end_layout
 
 \end_inset
@@ -3256,16 +3256,7 @@ Lymography
 \begin_inset Text
 
 \begin_layout Plain Layout
-25.19%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-20.93%
+24.55%
 \end_layout
 
 \end_inset
@@ -3275,6 +3266,15 @@ Lymography
 
 \begin_layout Plain Layout
 25.31%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.93%
 \end_layout
 
 \end_inset
@@ -3312,16 +3312,7 @@ Mammographic
 \begin_inset Text
 
 \begin_layout Plain Layout
-16.59%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-17.42%
+16.74%
 \end_layout
 
 \end_inset
@@ -3331,6 +3322,15 @@ Mammographic
 
 \begin_layout Plain Layout
 21.38%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.16%
 \end_layout
 
 \end_inset
@@ -3368,16 +3368,7 @@ OptDigits
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+45.96%
 \end_layout
 
 \end_inset
@@ -3387,6 +3378,15 @@ OptDigits
 
 \begin_layout Plain Layout
 81.22%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+70.93%
 \end_layout
 
 \end_inset
@@ -3424,16 +3424,7 @@ Page Blocks
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+7.06%
 \end_layout
 
 \end_inset
@@ -3443,6 +3434,15 @@ Page Blocks
 
 \begin_layout Plain Layout
 10.09%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.28%
 \end_layout
 
 \end_inset
@@ -3489,7 +3489,7 @@ Parkinsons
 \begin_inset Text
 
 \begin_layout Plain Layout
-15.47%
+17.42%
 \end_layout
 
 \end_inset
@@ -3498,7 +3498,7 @@ Parkinsons
 \begin_inset Text
 
 \begin_layout Plain Layout
-17.42%
+15.47%
 \end_layout
 
 \end_inset
@@ -3536,16 +3536,7 @@ Penbased
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+41.79%
 \end_layout
 
 \end_inset
@@ -3555,6 +3546,15 @@ Penbased
 
 \begin_layout Plain Layout
 82.47%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+73.16%
 \end_layout
 
 \end_inset
@@ -3601,7 +3601,7 @@ Pima
 \begin_inset Text
 
 \begin_layout Plain Layout
-24.20%
+25.78%
 \end_layout
 
 \end_inset
@@ -3610,7 +3610,7 @@ Pima
 \begin_inset Text
 
 \begin_layout Plain Layout
-25.78%
+24.12%
 \end_layout
 
 \end_inset
@@ -3657,7 +3657,7 @@ Popfailures
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.77%
+7.04%
 \end_layout
 
 \end_inset
@@ -3666,7 +3666,7 @@ Popfailures
 \begin_inset Text
 
 \begin_layout Plain Layout
-7.04%
+4.95%
 \end_layout
 
 \end_inset
@@ -3704,16 +3704,7 @@ Regions2
 \begin_inset Text
 
 \begin_layout Plain Layout
-28.88%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-33.40%
+28.56%
 \end_layout
 
 \end_inset
@@ -3723,6 +3714,15 @@ Regions2
 
 \begin_layout Plain Layout
 38.29%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.40%
 \end_layout
 
 \end_inset
@@ -3769,7 +3769,7 @@ Saheart
 \begin_inset Text
 
 \begin_layout Plain Layout
-29.76%
+32.19%
 \end_layout
 
 \end_inset
@@ -3778,7 +3778,7 @@ Saheart
 \begin_inset Text
 
 \begin_layout Plain Layout
-32.19%
+29.86%
 \end_layout
 
 \end_inset
@@ -3816,16 +3816,7 @@ Segment
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+21.01%
 \end_layout
 
 \end_inset
@@ -3835,6 +3826,15 @@ Segment
 
 \begin_layout Plain Layout
 59.68%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48.70%
 \end_layout
 
 \end_inset
@@ -3872,16 +3872,7 @@ Shuttle
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+15.70%
 \end_layout
 
 \end_inset
@@ -3891,6 +3882,15 @@ Shuttle
 
 \begin_layout Plain Layout
 32.97%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3937,7 +3937,7 @@ Spiral
 \begin_inset Text
 
 \begin_layout Plain Layout
-41.27%
+44.87%
 \end_layout
 
 \end_inset
@@ -3946,7 +3946,7 @@ Spiral
 \begin_inset Text
 
 \begin_layout Plain Layout
-44.87%
+41.27%
 \end_layout
 
 \end_inset
@@ -3993,7 +3993,7 @@ Tae
 \begin_inset Text
 
 \begin_layout Plain Layout
-55.07%
+60.07%
 \end_layout
 
 \end_inset
@@ -4002,7 +4002,7 @@ Tae
 \begin_inset Text
 
 \begin_layout Plain Layout
-60.07%
+55.07%
 \end_layout
 
 \end_inset
@@ -4040,16 +4040,7 @@ Thyroid
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+4.16%
 \end_layout
 
 \end_inset
@@ -4059,6 +4050,15 @@ Thyroid
 
 \begin_layout Plain Layout
 10.52%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.42%
 \end_layout
 
 \end_inset
@@ -4105,7 +4105,7 @@ Wdbc
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.57%
+7.27%
 \end_layout
 
 \end_inset
@@ -4114,7 +4114,7 @@ Wdbc
 \begin_inset Text
 
 \begin_layout Plain Layout
-7.27%
+6.22%
 \end_layout
 
 \end_inset
@@ -4161,7 +4161,7 @@ Wine
 \begin_inset Text
 
 \begin_layout Plain Layout
-12.84%
+31.41%
 \end_layout
 
 \end_inset
@@ -4170,7 +4170,7 @@ Wine
 \begin_inset Text
 
 \begin_layout Plain Layout
-31.41%
+12.84%
 \end_layout
 
 \end_inset
@@ -4217,7 +4217,7 @@ Z_F_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-9.65%
+13.16%
 \end_layout
 
 \end_inset
@@ -4226,7 +4226,7 @@ Z_F_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-13.16%
+9.65%
 \end_layout
 
 \end_inset
@@ -4273,7 +4273,7 @@ Z_O_N_F_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-45.20%
+48.71%
 \end_layout
 
 \end_inset
@@ -4282,7 +4282,7 @@ Z_O_N_F_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-48.71%
+45.20%
 \end_layout
 
 \end_inset
@@ -4329,7 +4329,7 @@ ZO_NF_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-6.81%
+9.02%
 \end_layout
 
 \end_inset
@@ -4338,7 +4338,7 @@ ZO_NF_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-9.02%
+6.81%
 \end_layout
 
 \end_inset
@@ -4385,7 +4385,7 @@ ZONF_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.98%
+4.03%
 \end_layout
 
 \end_inset
@@ -4394,7 +4394,7 @@ ZONF_S
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.03%
+3.98%
 \end_layout
 
 \end_inset
