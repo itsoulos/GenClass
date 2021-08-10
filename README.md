@@ -8,7 +8,7 @@ GenClass is a software entirely written in ANSI C++ that constructs classificati
  - The GNU make utility
  - The OpenMP programming library 
 
-### Installation ##
+### Installation ###
 The following steps are required in order to build the tool:
 
     - Uncompress the tool 
@@ -25,6 +25,15 @@ The parameters in Makefile.inc are the following:
     - ROOTDIR: Is the location of the GenClass directory. 
 
 After the compilation the executable genclass will be placed under bin subdirectory.
+### Windows Installation ##
+On Windows a simple solution for the installation could be the following steps:
+- Install the software installer Choco [choco](https://chocolatey.org/)
+- Issue the command: choco install make
+- Issue the command: choco install mingw
+- Enter in the src subdirectory of the distribution
+- Issue the command: make
+The final outcome is the executable genclass.exe 
+
 ## Contents ##
 The software has the following subdirectories
 
