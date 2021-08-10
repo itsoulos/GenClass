@@ -566,14 +566,14 @@ Apply the previous program to test set and report the induced error.
 
 \end_deeper
 \begin_layout Standard
-The installation of the software is explained in detail in the relevant
- Wiki page 
+The installation of the software is explained in detail in the main page
+ 
 \begin_inset Flex URL
 status open
 
 \begin_layout Plain Layout
 
-https://github.com/itsoulos/GenClass/wiki
+https://github.com/itsoulos/GenClass/
 \end_layout
 
 \end_inset
@@ -1340,6 +1340,16 @@ reference "tab:Experimental-results"
  Of course, the method could be slower than RBF or Neural network due to
  the usage of Grammatical Evolution, however this increase in time can be
  significantly reduced with the use of threads.
+  In addition, the software appears to be slightly better in some datasets
+ than originally published 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "TsoulosGenclass"
+literal "false"
+
+\end_inset
+
+ due to the use of far more chromosomes in the genetic population.
  
 \end_layout
 
