@@ -370,6 +370,41 @@ This article introduces a software tool (named GenClass) coded in ANSI C++,
  Also, this tool has a series of command line options to control the various
  aspects of the software, such as mutation rate or number of chromosomes
  in the genetic population.
+
+\series bold
+ 
+\series default
+Another similar software is the Parallel Program Induction (PPI) available
+ from the relevant URL 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/daaugusto/ppi
+\end_layout
+
+\end_inset
+
+, which constructs with Grammatical Evolution programs for regression and
+ classification, but the PPI software has many dependencies on other software
+ to be compiled.
+ Also, GenClass produces classification problems in human readable format
+ and it can export output in C++ and in Python.
+ However, in the current version GenClass does not solve regression problems.
+ 
+\series bold
+Also, recently the software NNC has been published 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "NNC"
+literal "false"
+
+\end_inset
+
+, which incorporates the Grammatical Evolution to construct neural networks
+ for regression and classification problems.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1340,10 +1375,7 @@ reference "tab:Experimental-results"
  Of course, the method could be slower than RBF or Neural network due to
  the usage of Grammatical Evolution, however this increase in time can be
  significantly reduced with the use of threads.
- Also, the software in some cases seems to produce slightly better classificatio
-n results since the original paper , due to the usage of more chromosomes
- in the genetic population.
- In addition, the software appears to be slightly better in some datasets
+  In addition, the software appears to be slightly better in some datasets
  than originally published 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1848,6 +1880,24 @@ M.
  Periaux (Eds.), Evolutionary Algorithms in Engineering and Computer Science,
  Jyvskyl, Finland, 1999, pp.
  127–134.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "NNC"
+literal "false"
+
+\end_inset
+
+Ioannis G.
+ Tsoulos, Alexandros Tzallas, Dimitris Tsalikakis, NNC: A tool based on
+ Grammatical Evolution for data classification and differential equation
+ solving, Software X 
+\series bold
+10
+\series default
+, 2019.
 \end_layout
 
 \begin_layout Bibliography
