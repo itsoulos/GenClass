@@ -97,6 +97,8 @@ The executable has the following command line parameters:
 	(c) full. The program prints in every generation detailed information about the optimization procedure.
 
 12. -r seed: The integer parameter seed specifies the seed for the random number generator. It can assume any integer value.
+13. -i grammarfile:  The string parameter grammarfile determines the input grammar in BNF format that will be used. The default is empty and a 
+simple BNF grammar will be used.
 ## A typical run ##
 Consider the Ionosphere dataset available from the Machine Learning Repository in the following URL: http://www.ics.uci.edu/~mlearn/MLRepository.html. The ionosphere dataset contains data from the Johns Hopkins Ionosphere database. The two-class dataset contains 351 examples of 34 features each. The datasets has been divided into two files, ionosphere.train and ionosphere.test under directory examples. A typical run for the GenClass will be
 

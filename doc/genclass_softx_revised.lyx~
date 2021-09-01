@@ -146,6 +146,7 @@ A genetic programming tool is proposed here for data classification.
  in order to classify the input data, producing simple if – else rules and
  upon termination the tool produces the classification rules in C and Python
  files.
+ Also, the user can use his own BNF grammar through a command line option.
  The tool is tested on a wide range of classification problems and the produced
  results are compared against traditional techniques for data classification,
  yielding very promising results.
@@ -404,7 +405,9 @@ literal "false"
 
 , which incorporates the Grammatical Evolution to construct neural networks
  for regression and classification problems.
- 
+ Eventhough the GenClass software can not used for regression problems in
+ the current form it has similar execution runs as the NNC software and
+ also it can discover the hidden relationships .....
 \end_layout
 
 \begin_layout Standard
@@ -671,6 +674,28 @@ count
  Specify fold count for fold validation.
  Default value 0 (no folding).
  
+\end_layout
+
+\begin_layout Enumerate
+-i 
+\series bold
+grammarfile
+\series default
+.
+ The string parameter grammarfile stands for the user defined grammar in
+ BNF format.
+ If this options is empty, then the default grammar will be used.
+ An example of such a file is listed in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exampleGrammar"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and it is included under examples subdirectory of the distribution.
 \end_layout
 
 \begin_layout Enumerate
@@ -1967,7 +1992,7 @@ R.G.
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2018,7 +2043,7 @@ x_{M1} & x_{M2} & \ldots & x_{MD} & y_{M}
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2112,7 +2137,7 @@ int classifier(double *x)
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2200,7 +2225,7 @@ def classifier(input: List):
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2318,10 +2343,231 @@ TRAIN ERROR = 12.00%
 \end_inset
 
 
-\begin_inset Float table
+\begin_inset Float figure
 wide false
 sideways false
 status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+An example of user defined grammar.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exampleGrammar"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+<S>::= <BEXPR>
+\end_layout
+
+\begin_layout Plain Layout
+<BEXPR>::= <XLIST><BOOLOP><EXPR>
+\end_layout
+
+\begin_layout Plain Layout
+         | !(<BEXPR>)
+\end_layout
+
+\begin_layout Plain Layout
+         | <XLIST><BOOLOP><EXPR>&<BEXPR>
+\end_layout
+
+\begin_layout Plain Layout
+         | <XLIST><BOOLOP><EXPR>|<BEXPR>
+\end_layout
+
+\begin_layout Plain Layout
+<BOOLOP>::= >
+\end_layout
+
+\begin_layout Plain Layout
+          | >=
+\end_layout
+
+\begin_layout Plain Layout
+          | <
+\end_layout
+
+\begin_layout Plain Layout
+          | <=
+\end_layout
+
+\begin_layout Plain Layout
+<EXPR>::= (<EXPR><BINARYOP><EXPR>)
+\end_layout
+
+\begin_layout Plain Layout
+        | <FUNCTION>(<EXPR>)
+\end_layout
+
+\begin_layout Plain Layout
+        | <TERMINAL>
+\end_layout
+
+\begin_layout Plain Layout
+<BINARYOP>::= +
+\end_layout
+
+\begin_layout Plain Layout
+            | -
+\end_layout
+
+\begin_layout Plain Layout
+            | *
+\end_layout
+
+\begin_layout Plain Layout
+            | /
+\end_layout
+
+\begin_layout Plain Layout
+<FUNCTION>::= sin
+\end_layout
+
+\begin_layout Plain Layout
+            | cos
+\end_layout
+
+\begin_layout Plain Layout
+            | exp
+\end_layout
+
+\begin_layout Plain Layout
+            | log
+\end_layout
+
+\begin_layout Plain Layout
+<TERMINAL>::= <XLIST>
+\end_layout
+
+\begin_layout Plain Layout
+            | <DIGITLIST>.<DIGITLIST>
+\end_layout
+
+\begin_layout Plain Layout
+            | (-<DIGITLIST>.<DIGITLIST>)
+\end_layout
+
+\begin_layout Plain Layout
+<DIGITLIST>::= <DIGIT>
+\end_layout
+
+\begin_layout Plain Layout
+             | <DIGIT><DIGIT>
+\end_layout
+
+\begin_layout Plain Layout
+             | <DIGIT><DIGIT><DIGIT>
+\end_layout
+
+\begin_layout Plain Layout
+<DIGIT>::= 0
+\end_layout
+
+\begin_layout Plain Layout
+         | 1
+\end_layout
+
+\begin_layout Plain Layout
+         | 2
+\end_layout
+
+\begin_layout Plain Layout
+         | 3
+\end_layout
+
+\begin_layout Plain Layout
+         | 4
+\end_layout
+
+\begin_layout Plain Layout
+         | 5
+\end_layout
+
+\begin_layout Plain Layout
+         | 6
+\end_layout
+
+\begin_layout Plain Layout
+         | 7
+\end_layout
+
+\begin_layout Plain Layout
+         | 8
+\end_layout
+
+\begin_layout Plain Layout
+         | 9
+\end_layout
+
+\begin_layout Plain Layout
+<XLIST>::= x1
+\end_layout
+
+\begin_layout Plain Layout
+         | x2
+\end_layout
+
+\begin_layout Plain Layout
+         | x3
+\end_layout
+
+\begin_layout Plain Layout
+         | x4
+\end_layout
+
+\begin_layout Plain Layout
+         | x5
+\end_layout
+
+\begin_layout Plain Layout
+         | x6
+\end_layout
+
+\begin_layout Plain Layout
+         | x7
+\end_layout
+
+\begin_layout Plain Layout
+         | x8
+\end_layout
+
+\begin_layout Plain Layout
+       
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2480,7 +2726,7 @@ VALUE
 \begin_inset Float table
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard

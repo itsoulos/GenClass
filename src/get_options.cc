@@ -11,6 +11,7 @@ double	srate;
 double	mrate;
 char	train_file[1024];
 char	test_file[1024];
+char	grammar_file[1024];
 char	output_method[100];
 int	generations;
 int	random_seed;
@@ -18,7 +19,7 @@ int	wrapping;
 int	foldcount;
 void	parse_cmd_line(int argc,char **argv);
 
-const char *short_options="c:l:s:m:p:t:g:w:r:f:o:d:";
+const char *short_options="c:l:s:m:p:t:g:w:r:f:o:d:i:";
 
 void	print_usage()
 {
@@ -26,6 +27,7 @@ void	print_usage()
 			"\t-c	Specify population count.\n"
 			"\t-f	Specify fold count for fold validation. Default value 0 (no folding).\n"
 			"\t-g	Specify number of generations.\n"
+			"\t-i	Specify grammar file. Default none.\n"
 			"\t-l	Specify	population length.\n"
 			"\t-d	Specify maximum number of threads.\n"
 			"\t-m	Specify mutation rate.\n"
@@ -63,6 +65,9 @@ void	parse_cmd_line(int argc,char **argv)
 		{
 			case 'c':
 				pcount=atoi(optarg);
+				break;
+			case 'i':
+				strcpy(grammar_file,optarg);
 				break;
 			case 'd':
 				maxthreads=atoi(optarg);

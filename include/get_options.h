@@ -6,6 +6,7 @@ extern double	srate;
 extern double	mrate;
 extern char	train_file[1024];
 extern char	test_file[1024];
+extern char     grammar_file[1024];
 extern char	output_method[100];
 extern int	generations;
 extern int	random_seed;
