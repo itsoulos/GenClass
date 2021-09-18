@@ -274,7 +274,7 @@ literal "true"
 \end_inset
 
  etc.
- During the past years many methods have been proposed to problems of this
+ During the past years, many methods have been proposed to problems of this
  category such as neural networks 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -369,7 +369,7 @@ This article introduces a software tool (named GenClass) coded in ANSI C++,
  applied in any classification problem, without a priory knowledge of the
  dataset.
  Also, this tool has a series of command line options to control the various
- aspects of the software, such as mutation rate or number of chromosomes
+ aspects of the software, such as mutation rate or the number of chromosomes
  in the genetic population.
 
 \series bold
@@ -403,7 +403,7 @@ literal "false"
 
 , which incorporates the Grammatical Evolution to construct neural networks
  for regression and classification problems.
- Even though the GenClass software can not used for regression problems
+ Even though the GenClass software can not be used for regression problems
  in the current form it has similar execution runs as the NNC software and
  also it can discover the hidden relationships between the features of a
  dataset and the expected output.
@@ -1393,7 +1393,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-The results from the experiments are displayed in table 
+The results from the experiments are displayed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Experimental-results"
@@ -1467,19 +1467,19 @@ name "sec:Impact"
 \begin_layout Standard
 This software tool produces human readable classification rules in ANSI
  C++ as well as in Python format.
- This rules used to classify any classification problem without a priory
+ These rules are used to classify any classification problem without a priory
  knowledge about the nature of the problem.
  The implemented software utilizes the Grammatical Evolution technique to
  produce the classification rules based on simple BNF grammar.
  The software is guided by a series of command line options that control
  many critical options of the underlying method such as the number of chromosome
 s, the mutation rate etc.
- Also, the software is designed to be use in multi core computational environmen
-ts through the public available library of OpenMP.
+ Also, the software is designed to be used in multi core computational environme
+nts through the publicly available library of OpenMP.
  The proposed method proved to be very reliable on a series of simple and
  hard classification problems and hence the software can be used in different
  areas such as physics, chemistry, medicine etc.
- The user need to provide only the patterns of the classification problem
+ The user needs to provide only the patterns of the classification problem
  in a simple text format and if it is required a series of command line
  options.
  Also, the user can provide his own grammar in BNF format in a separate
@@ -2432,178 +2432,222 @@ inline false
 status collapsed
 
 \begin_layout Plain Layout
+
 <S>::= <BEXPR>
 \end_layout
 
 \begin_layout Plain Layout
+
 <BEXPR>::= <XLIST><BOOLOP><EXPR>
 \end_layout
 
 \begin_layout Plain Layout
+
          | !(<BEXPR>)
 \end_layout
 
 \begin_layout Plain Layout
+
          | <XLIST><BOOLOP><EXPR>&<BEXPR>
 \end_layout
 
 \begin_layout Plain Layout
+
          | <XLIST><BOOLOP><EXPR>|<BEXPR>
 \end_layout
 
 \begin_layout Plain Layout
+
 <BOOLOP>::= >
 \end_layout
 
 \begin_layout Plain Layout
+
           | >=
 \end_layout
 
 \begin_layout Plain Layout
+
           | <
 \end_layout
 
 \begin_layout Plain Layout
+
           | <=
 \end_layout
 
 \begin_layout Plain Layout
+
 <EXPR>::= (<EXPR><BINARYOP><EXPR>)
 \end_layout
 
 \begin_layout Plain Layout
+
         | <FUNCTION>(<EXPR>)
 \end_layout
 
 \begin_layout Plain Layout
+
         | <TERMINAL>
 \end_layout
 
 \begin_layout Plain Layout
+
 <BINARYOP>::= +
 \end_layout
 
 \begin_layout Plain Layout
+
             | -
 \end_layout
 
 \begin_layout Plain Layout
+
             | *
 \end_layout
 
 \begin_layout Plain Layout
+
             | /
 \end_layout
 
 \begin_layout Plain Layout
+
 <FUNCTION>::= sin
 \end_layout
 
 \begin_layout Plain Layout
+
             | cos
 \end_layout
 
 \begin_layout Plain Layout
+
             | exp
 \end_layout
 
 \begin_layout Plain Layout
+
             | log
 \end_layout
 
 \begin_layout Plain Layout
+
 <TERMINAL>::= <XLIST>
 \end_layout
 
 \begin_layout Plain Layout
+
             | <DIGITLIST>.<DIGITLIST>
 \end_layout
 
 \begin_layout Plain Layout
+
             | (-<DIGITLIST>.<DIGITLIST>)
 \end_layout
 
 \begin_layout Plain Layout
+
 <DIGITLIST>::= <DIGIT>
 \end_layout
 
 \begin_layout Plain Layout
+
              | <DIGIT><DIGIT>
 \end_layout
 
 \begin_layout Plain Layout
+
              | <DIGIT><DIGIT><DIGIT>
 \end_layout
 
 \begin_layout Plain Layout
+
 <DIGIT>::= 0
 \end_layout
 
 \begin_layout Plain Layout
+
          | 1
 \end_layout
 
 \begin_layout Plain Layout
+
          | 2
 \end_layout
 
 \begin_layout Plain Layout
+
          | 3
 \end_layout
 
 \begin_layout Plain Layout
+
          | 4
 \end_layout
 
 \begin_layout Plain Layout
+
          | 5
 \end_layout
 
 \begin_layout Plain Layout
+
          | 6
 \end_layout
 
 \begin_layout Plain Layout
+
          | 7
 \end_layout
 
 \begin_layout Plain Layout
+
          | 8
 \end_layout
 
 \begin_layout Plain Layout
+
          | 9
 \end_layout
 
 \begin_layout Plain Layout
+
 <XLIST>::= x1
 \end_layout
 
 \begin_layout Plain Layout
+
          | x2
 \end_layout
 
 \begin_layout Plain Layout
+
          | x3
 \end_layout
 
 \begin_layout Plain Layout
+
          | x4
 \end_layout
 
 \begin_layout Plain Layout
+
          | x5
 \end_layout
 
 \begin_layout Plain Layout
+
          | x6
 \end_layout
 
 \begin_layout Plain Layout
+
          | x7
 \end_layout
 
 \begin_layout Plain Layout
+
          | x8
 \end_layout
 
