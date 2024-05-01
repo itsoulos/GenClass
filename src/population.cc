@@ -277,8 +277,9 @@ void    Population::localSearch(int pos)
                         double f;
                         do
                         {
-                                //g[i]=rand() % MAX_RULE;
-								g[i]=randUint()% MAX_RULE;
+                                g[i]=rand() % MAX_RULE;
+								//g[i]=randUint()% MAX_RULE;
+
                                 ik++;
                                 if(ik==10) break;
                                 f=fitness(g);
