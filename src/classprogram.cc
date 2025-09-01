@@ -430,7 +430,7 @@ double 	ClassProgram::fitness(vector<int> &genome)
 
         }
 
-	return -value1;
+//	return -value1;
 
 	if(isnan(value) || isinf(value)) return -1e+8;
 	return -value*100.0/trainy.size();
