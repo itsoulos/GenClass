@@ -324,10 +324,28 @@ double	ClassProgram::getClassError(vector<int> &genome,char *filename)
 		}
 	}
 
+	vector<int> fail;
+	vector<int> belong;
+	fail.resize(nclass);
+	belong.resize(nclass);
+	for(int i=0;i<nclass;i++)
+		fail[i]=belong[i]=0;
+
 	for(int i=0;i<testy.size();i++)
 	{
 		if(fabs(outy[i]-NAN_CLASS)<1e-5) outy[i]=vclass[nclass-1];
 		value=value+(fabs(findMapper(testy[i])-outy[i])>1e-5);
+	    int pos=findMapper(testy[i]);
+		belong[pos]++;
+		if(fabs(findMapper(testy[i])-outy[i])>1e-5)
+		{
+			fail[pos]++;
+		}
+	}
+	printf("TEST REPORT=>\n");
+	for(int i=0;i<nclass;i++)
+	{
+		printf("CLASS[%3d (%3d)] FAIL=%5.2lf%% \n",i,belong[i],fail[i]*100.0/belong[i]);
 	}
 
 	if(isnan(value) || isinf(value)) return -1e+8;
@@ -387,11 +405,15 @@ double 	ClassProgram::fitness(vector<int> &genome)
 			fail[pos]++;
 		}
 	}
+
 	extern int ok_to_print;
 	if(ok_to_print)
-	for(int i=0;i<nclass;i++)
 	{
-		printf("CLASS[%3d (%3d)] FAIL=%5.2lf%% \n",i,belong[i],fail[i]*100.0/belong[i]);
+		printf("TRAIN REPORT=>\n");
+		for(int i=0;i<nclass;i++)
+		{
+			printf("CLASS[%3d (%3d)] FAIL=%5.2lf%% \n",i,belong[i],fail[i]*100.0/belong[i]);
+		}
 	}
 
 	        double value1=0.0;
@@ -408,7 +430,7 @@ double 	ClassProgram::fitness(vector<int> &genome)
 
         }
 
-//	return -value1;
+	return -value1;
 
 	if(isnan(value) || isinf(value)) return -1e+8;
 	return -value*100.0/trainy.size();
